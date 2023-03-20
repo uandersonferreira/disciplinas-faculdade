@@ -15,11 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @Transactional
 @RequestMapping("produtos")
-public class produtoController {
+public class ProdutoController {
     private final ProdutoRepository produtoRepository;
 
     @Autowired
-    public produtoController(ProdutoRepository produtoRepository) {
+    public ProdutoController(ProdutoRepository produtoRepository) {
         this.produtoRepository = produtoRepository;
     }
 

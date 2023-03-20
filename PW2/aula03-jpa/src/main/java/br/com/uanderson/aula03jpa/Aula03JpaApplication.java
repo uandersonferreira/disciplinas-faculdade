@@ -1,6 +1,5 @@
 package br.com.uanderson.aula03jpa;
 
-import jakarta.persistence.EntityManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
