@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Itens Venda</title>
+    <style>
+        table{
+            border: 1px solid black;
+        }
+
+        th, td{
+            border: 1px solid black;
+        }
+
+        th{
+            text-align: center;
+            font-weight: bold;
+        }
+        button > a{
+            color: white;
+        }
+
+    </style>
+</head>
+<body class="container">
+
+    <h1>Itens Venda Cadastrados</h1>
+        <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID ItemVenda</th>
+                        <th>QTD</th>
+                        <th>Produto</th>
+                        <th>ID Produto</th>
+                        <th>Valor Produto</th>
+                        <th>Total</th>
+                        <th colspan="2">Ações</th>
+                    </tr>
+                </thead>
+                <tbody><!-- -->
+                    <tr th:each="itens : ${itensVenda}"><!-- foreach -->
+                        <td th:text="${itens.getId()}"></td> <!-- atributo id-->
+                        <td th:text="${itens.getQtd()}"></td><!-- atributo name-->
+                        <td th:text="${itens.getProduto().getDescricao()}"></td><!-- atributo name-->
+                        <td th:text="${itens.getProduto().getId()}"></td><!-- atributo name-->
+                        <td th:text="${itens.getProduto().getValor()}"></td><!-- atributo name-->
+                        <td th:text="${itens.total()}"></td><!-- atributo name-->
+                        <td> <a th:href="@{/itemvenda/edit/{id}(id=${itens.id})}">Editar</a> </td> <!--pessoas/edit/1 - CONTROLLER -->
+                        <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/itemvenda/remove/{id}(id=${itens.id})}">Excluir</a> </td>
+                    </tr>
+                </tbody>
+        </table>
+
+    <button class="btn btn-success" role="button"><a th:href="@{/itemvenda/form}">Novo</a></button> <!--pessoas/edit/1 - CONTROLLER -->
+    <button class="btn btn-primary" role="button"><a th:href="@{/}">Voltar</a></button>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>

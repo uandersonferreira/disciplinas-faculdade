@@ -1,10 +1,10 @@
-package br.com.uanderson.aula03jpa;
+package br.com.uanderson.aula06jpaheranca;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Aula04JpaMapeamentoApplicationTests {
+class Aula06JpaHerancaApplicationTests {
 
     @Test
     void contextLoads() {
