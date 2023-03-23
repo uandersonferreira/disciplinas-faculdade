@@ -15,8 +15,8 @@
 @{/pessoas/save} -> Faz uma chamada/link para o method save() Do controller
 -->
 <h1>FORM</h1>
-<form th:action="${produto == null} ? @{/produtos/save} : @{/produtos/update} "
-      th:object="${produto}" method="post">
+<form th:action="${itensVenda == null} ? @{/itemvenda/save} : @{/itemvenda/update} "
+      th:object="${itensVenda}" method="post">
 
     <div class="form-group">
         <label for="id">Id</label>

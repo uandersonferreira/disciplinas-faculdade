@@ -2,6 +2,7 @@ package br.com.uanderson.aula03jpa.controller;
 
 import br.com.uanderson.aula03jpa.model.entity.Produto;
 import br.com.uanderson.aula03jpa.model.repository.ProdutoRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @Transactional
 @RequestMapping("produtos")
+@Log4j2
 public class ProdutoController {
     private final ProdutoRepository produtoRepository;
 
@@ -34,9 +36,14 @@ public class ProdutoController {
         return "/produto/form";
     }
 
+    @RequestMapping("/")
+    public String home(Produto produto){
+        return "home";
+    }
 
     @PostMapping("/save")
     public ModelAndView save(Produto produto){
+        log.info("dentro do save Controller '{}'", produto.getDescricao());
         produtoRepository.save(produto);
         return new ModelAndView("redirect:/produtos/list");
         /*
@@ -45,6 +52,7 @@ public class ProdutoController {
         para a lista de produtos através da chamado do method do controller /produtos/list.
          */
     }
+
 
     @GetMapping("/remove/{id}")
     public ModelAndView remove(@PathVariable("id") Long id){

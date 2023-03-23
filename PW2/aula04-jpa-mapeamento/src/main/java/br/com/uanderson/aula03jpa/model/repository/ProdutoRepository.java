@@ -4,17 +4,20 @@ import br.com.uanderson.aula03jpa.model.entity.Produto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@Log4j2
 public class ProdutoRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     public void save(Produto produto){
+        log.info("dentro save do ProdutoRepository");
         entityManager.persist(produto);
     }
 

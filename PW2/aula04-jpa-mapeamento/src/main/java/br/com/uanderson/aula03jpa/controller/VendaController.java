@@ -1,5 +1,6 @@
 package br.com.uanderson.aula03jpa.controller;
 
+import br.com.uanderson.aula03jpa.model.entity.Produto;
 import br.com.uanderson.aula03jpa.model.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,11 @@ public class VendaController {
     public String listarVendas(ModelMap modelMap){
         modelMap.addAttribute("listVendas", vendaRepository.listAll());
         return "venda/list";//page html
+    }
+
+    @RequestMapping("/")
+    public String home(){
+        return "home";
     }
 
 
