@@ -11,29 +11,40 @@
 <body>
     <header>
         <nav class="navbar bg-dark">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <span class="text-white">&lt;<span class="text-success">H</span>-ome&gt;</IF-Developer></span>
                 </a>
 
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-success"  th:href="@{/produtos/list}">Listar Produtos</a>
-                    </li>
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-success"  th:href="@{/produtos/list}">Listar Produtos</a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link text-success"  th:href="@{/vendas/list}">Listar Vendas</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-success"  th:href="@{/vendas/list}">Listar Vendas</a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link text-success"  th:href="@{/itemvenda/list}">Itens Vendas</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-success"  th:href="@{/itemvenda/list}">Itens Vendas</a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link text-success" th:href="@{/produtos/form}">Cadastrar Produtos</a>
-                    </li>
-                </ul>
-            </div>
+                        <li class="nav-item">
+                            <a class="nav-link text-success" th:href="@{/produtos/form}">Cadastrar Produtos</a>
+                        </li>
+
+                        <div class="dropdown">
+                            <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Pessoa
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" th:href="@{/pessoa/fisica/list}">Pessoa Fisica</a>
+                                <a class="dropdown-item" th:href="@{/pessoa/fisica/list}">Pessoa Juridica</a>
+                            </div>
+                        </div>
+
+                    </ul>
+                </div>
         </nav>
     </header>
 
