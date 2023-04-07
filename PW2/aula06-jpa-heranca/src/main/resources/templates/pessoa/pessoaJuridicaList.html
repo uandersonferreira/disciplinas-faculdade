@@ -38,7 +38,7 @@
         <tbody><!-- -->
         <tr th:each="pj : ${pessoasJuridicas}"><!-- foreach -->
             <td th:text="${pj.getId()}"></td> <!-- atributo id-->
-            <td th:text="${pj.getNome()}"></td><!-- atributo name-->
+            <td th:text="${pj.getEmail()}"></td><!-- atributo name-->
             <td th:text="${pj.getCnpj()}"></td><!-- atributo name-->
             <!--                    <td> <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
             <!--                    <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a> </td>-->

@@ -1,12 +1,14 @@
 package br.com.uanderson.aula06jpaheranca.model.entity;
 
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Scope;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Scope("session")
 public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

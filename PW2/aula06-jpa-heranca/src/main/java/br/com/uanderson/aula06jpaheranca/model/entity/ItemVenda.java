@@ -1,8 +1,10 @@
 package br.com.uanderson.aula06jpaheranca.model.entity;
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Scope;
 
 
 @Entity
+@Scope("session")
 public class ItemVenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -10,7 +12,7 @@ public class ItemVenda {
     @ManyToOne // Muitos itemVenda podem está associados a um produto
     @JoinColumn(name = "produto_id")
     private Produto produto;
-    private int qtd;
+    private Integer qtd;
 
     /*
     @ManyToOne -> Vários itemVenda para um produto
@@ -18,8 +20,7 @@ public class ItemVenda {
 
 
 
-    public ItemVenda(Long id, int qtd, Produto produto) {
-        this.id = id;
+    public ItemVenda(Integer qtd, Produto produto) {
         this.qtd = qtd;
         this.produto = produto;
     }
@@ -47,11 +48,11 @@ public class ItemVenda {
         this.produto = produto;
     }
 
-    public int getQtd() {
+    public Integer getQtd() {
         return qtd;
     }
 
-    public void setQtd(int qtd) {
+    public void setQtd(Integer qtd) {
         this.qtd = qtd;
     }
 }//class

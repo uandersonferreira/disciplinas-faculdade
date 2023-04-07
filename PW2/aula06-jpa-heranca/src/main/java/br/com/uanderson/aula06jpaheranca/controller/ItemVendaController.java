@@ -1,8 +1,11 @@
 package br.com.uanderson.aula06jpaheranca.controller;
 
 import br.com.uanderson.aula06jpaheranca.model.entity.ItemVenda;
+import br.com.uanderson.aula06jpaheranca.model.entity.Produto;
 import br.com.uanderson.aula06jpaheranca.model.repository.ItemVendaRepository;
+import br.com.uanderson.aula06jpaheranca.model.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("itemvenda")
+@Scope("request")
 public class ItemVendaController {
-
     private  final ItemVendaRepository itemVendaRepository;
 
     @Autowired
@@ -36,19 +39,14 @@ public class ItemVendaController {
     
     @GetMapping("/form")
     public String form(ItemVenda itemVenda){
-        return "/itemVenda/form";
+        return "itensVenda/form";
     }
     
 
-    @PostMapping("/save")
+    @GetMapping("/save")
     public ModelAndView save(ItemVenda itemVenda){
         itemVendaRepository.save(itemVenda);
         return new ModelAndView("redirect:/itemvenda/list");
-        /*
-        Ao realizar o submit do form.html irá se chamado o metodo save por de baixo dos panos
-        para pode salvar e quando aciona o /save realiza-se um redirecionamento automático para
-        para a lista de itemvenda através da chamado do method do controller /itemvenda/list.
-         */
     }
 
 
@@ -62,14 +60,15 @@ public class ItemVendaController {
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("itensVenda", itemVendaRepository.findById(id));
-        return new ModelAndView("/itemVenda/form", model);//view form.html
+        return new ModelAndView("itensVenda/form", model);//view form.html
     }
 
     @PostMapping("/update")
     public ModelAndView update(ItemVenda itemVenda) {
         itemVendaRepository.update(itemVenda);
-        return new ModelAndView("redirect:/itemvenda/list");
+        return new ModelAndView("redirect:itemvenda/list");
     }
+
 
 
 }//class

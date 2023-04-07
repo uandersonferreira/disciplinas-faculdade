@@ -11,3 +11,15 @@ public class Aula06JpaHerancaApplication {
     }
 
 }
+/*
+ * Criar view para cadastro e consulta de produtos; OK
+
+ * Criar view que lista os produtos e permita adicionar um produto ao carrinho;
+
+ * Crie uma view CARRINHO (DE COMPRAS) que possibilita visualizar os itens que
+ * foram inseridos, remover caso desejar e finalizar a venda. Ao concluir a venda,
+ *  apresentar a lista de vendas ao usuário.
+
+ * Criar também uma view para listar todas as Vendas com opção para visualizar dados
+ *  de uma Venda em particular;
+ */

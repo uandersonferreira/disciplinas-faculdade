@@ -12,7 +12,8 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String nome;
+    private String email;
+    private String telefone;
 
     //UMA PESSOA PODE TER VÁRIAS VENDAS
     @OneToMany(mappedBy = "id")
@@ -20,13 +21,18 @@ public class Pessoa implements Serializable {
     //UMA VENDA PERTENCE APENAS A UMA PESSOA
 
 
-    public Pessoa(Long id, String nome, List<Venda> vendaList) {
+    public Pessoa(Long id, String email, String telefone, List<Venda> vendaList) {
         this.id = id;
-        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
         this.vendaList = vendaList;
     }
 
     public Pessoa() {
+    }
+
+    public void dados(){
+
     }
 
     public Long getId() {
@@ -37,11 +43,27 @@ public class Pessoa implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public List<Venda> getVendaList() {
+        return vendaList;
+    }
+
+    public void setVendaList(List<Venda> vendaList) {
+        this.vendaList = vendaList;
     }
 }//class

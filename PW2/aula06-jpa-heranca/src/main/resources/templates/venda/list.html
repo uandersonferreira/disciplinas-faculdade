@@ -42,7 +42,7 @@
         <tr th:each="v : ${listVendas}"><!-- foreach -->
             <td th:text="${v.getId()}"></td> <!-- atributo id-->
             <td th:text="${v.getLocalDate()}"></td><!-- atributo name-->
-            <td th:text="${v.getPessoa().getNome()}"></td><!-- atributo name-->
+            <td th:text="${v.getPessoa().getEmail()}"></td><!-- atributo name-->
             <td th:text="${v.getProdutoItemVenda().getDescricao()}"></td><!-- atributo name-->
             <td th:text="${v.total()}"></td><!-- atributo name-->
             <!--                    <td> <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->

@@ -1,5 +1,6 @@
 package br.com.uanderson.aula06jpaheranca.model.repository;
 
+import br.com.uanderson.aula06jpaheranca.model.entity.Produto;
 import br.com.uanderson.aula06jpaheranca.model.entity.Venda;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -14,6 +15,10 @@ public class VendaRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+
+    public void save(Venda venda){
+        entityManager.persist(venda);
+    }
     public List<Venda> listAll(){
         final Query query = entityManager.createQuery("from Venda");
         return query.getResultList();
@@ -21,6 +26,8 @@ public class VendaRepository {
         method que irá listar todas as vendas cadastradas na base de dados.
          */
     }
+
+
 
 
 }//class

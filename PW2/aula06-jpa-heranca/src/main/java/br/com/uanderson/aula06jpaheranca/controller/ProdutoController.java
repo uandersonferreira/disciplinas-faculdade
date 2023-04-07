@@ -1,7 +1,12 @@
 package br.com.uanderson.aula06jpaheranca.controller;
 
+import br.com.uanderson.aula06jpaheranca.model.entity.ItemVenda;
 import br.com.uanderson.aula06jpaheranca.model.entity.Produto;
+import br.com.uanderson.aula06jpaheranca.model.entity.Venda;
+import br.com.uanderson.aula06jpaheranca.model.repository.ItemVendaRepository;
 import br.com.uanderson.aula06jpaheranca.model.repository.ProdutoRepository;
+import br.com.uanderson.aula06jpaheranca.model.repository.VendaRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,16 +18,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @Transactional
 @RequestMapping("produtos")
 @Log4j2
 public class ProdutoController {
     private final ProdutoRepository produtoRepository;
+    private final ItemVendaRepository itemVendaRepository;
+    private final VendaRepository vendaRepository;
 
     @Autowired
-    public ProdutoController(ProdutoRepository produtoRepository) {
+    public ProdutoController(ProdutoRepository produtoRepository, ItemVendaRepository itemVendaRepository, VendaRepository vendaRepository) {
         this.produtoRepository = produtoRepository;
+        this.itemVendaRepository = itemVendaRepository;
+        this.vendaRepository = vendaRepository;
     }
 
     @GetMapping("/list")
@@ -74,6 +85,7 @@ public class ProdutoController {
         produtoRepository.update(produto);
         return new ModelAndView("redirect:/produtos/list");
     }
+
 
 
 

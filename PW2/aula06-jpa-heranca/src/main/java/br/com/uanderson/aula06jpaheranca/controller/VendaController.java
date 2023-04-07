@@ -3,6 +3,7 @@ package br.com.uanderson.aula06jpaheranca.controller;
 import br.com.uanderson.aula06jpaheranca.model.entity.Venda;
 import br.com.uanderson.aula06jpaheranca.model.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +13,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping("vendas")
+@Scope("request")
 public class VendaController {
    private final VendaRepository vendaRepository;
-
 
    @Autowired
     public VendaController(VendaRepository vendaRepository) {

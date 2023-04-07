@@ -15,26 +15,25 @@
 
 <div class="container">
     <h1>FORM</h1>
-    <form th:action="${itensVenda == null} ? @{/itemvenda/save} : @{/itemvenda/update} "
-          th:object="${itensVenda}" method="post">
+    <form th:object="${itensVenda}" method="post">
 
         <div class="form-group">
             <label for="id">Id</label>
             <input class="form-control" type="number" id="id" th:field="*{id}" readonly="readonly" placeholder="Id Gerado Automático">
         </div>
-        <div class="form-group">
-            <label for="descricao">Descrição</label>
-            <input class="form-control" type="text" id="descricao" th:field="*{descricao}"  placeholder="Descrição">
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="descricao">Descrição</label>-->
+<!--            <input class="form-control" type="text" id="descricao" th:value="${itensVenda.getProduto().getDescricao()}"  placeholder="Descrição">-->
+<!--        </div>-->
 
-        <div class="form-group">
-            <label for="valor">Valor</label>
-            <input class="form-control" type="text" id="valor" th:field="*{valor}"  placeholder="Preço">
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="valor">Valor</label>-->
+<!--            <input class="form-control" type="text" id="valor" th:value="${itensVenda.getProduto().getValor()}"  placeholder="Preço">-->
+<!--        </div>-->
 
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-2">Enviar</button>
-        </div>
+<!--        <div class="col-auto">-->
+<!--            <button type="submit" class="btn btn-primary mb-2">Enviar</button>-->
+<!--        </div>-->
     </form>
 
 </div>

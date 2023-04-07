@@ -4,6 +4,7 @@ import br.com.uanderson.aula06jpaheranca.model.entity.ItemVenda;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

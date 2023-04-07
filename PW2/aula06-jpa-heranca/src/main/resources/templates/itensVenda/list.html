@@ -30,10 +30,10 @@
         <thead>
         <tr>
             <th>ID ItemVenda</th>
-            <th>QTD</th>
             <th>Produto</th>
-            <th>ID Produto</th>
             <th>Valor Produto</th>
+            <th>QTD</th>
+<!--            <th>ID Produto</th>-->
             <th>Total</th>
             <th colspan="2">Ações</th>
         </tr>
@@ -41,13 +41,14 @@
         <tbody><!-- -->
         <tr th:each="itens : ${itensVenda}"><!-- foreach -->
             <td th:text="${itens.getId()}"></td> <!-- atributo id-->
-            <td th:text="${itens.getQtd()}"></td><!-- atributo name-->
             <td th:text="${itens.getProduto().getDescricao()}"></td><!-- atributo name-->
-            <td th:text="${itens.getProduto().getId()}"></td><!-- atributo name-->
             <td th:text="${itens.getProduto().getValor()}"></td><!-- atributo name-->
+            <!--            <td th:text="${itens.getProduto().getId()}"></td>&lt;!&ndash; atributo name&ndash;&gt;-->
+            <td th:text="${itens.getQtd()}"></td><!-- atributo name-->
             <td th:text="${itens.total()}"></td><!-- atributo name-->
-            <td> <a th:href="@{/itemvenda/edit/{id}(id=${itens.id})}">Editar</a> </td> <!--pessoas/edit/1 - CONTROLLER -->
-            <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/itemvenda/remove/{id}(id=${itens.id})}">Excluir</a> </td>
+<!--            <td> <a style="color: green" th:href="@{/itemvenda/edit/{id}(id=${itens.id})}"><i class="fa-solid fa-cart-shopping"></i></a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
+            <td> <a th:href="@{/itemvenda/edit/{id}(id=${itens.id})}"><i class="fa-solid fa-pen-to-square "></i></a> </td> <!--pessoas/edit/1 - CONTROLLER -->
+            <td> <a style="color: red" onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/itemvenda/remove/{id}(id=${itens.id})}"><i class="fa-solid fa-trash"></i></a> </td>
         </tr>
         </tbody>
     </table>
