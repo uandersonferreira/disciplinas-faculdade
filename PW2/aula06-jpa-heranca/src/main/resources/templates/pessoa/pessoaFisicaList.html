@@ -5,17 +5,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:replace="~{home::bootstrap}">
+    <link th:replace="~{home::font-awesome}">
+
     <title>PESSOAS FISICAS</title>
     <style>
-        table{
-            border: 1px solid black;
-        }
 
-        th, td{
-            border: 1px solid black;
-        }
-
-        th{
+        th,td{
             text-align: center;
             font-weight: bold;
         }
@@ -26,31 +22,37 @@
     </style>
 
 </head>
-<body class="container">
-<!-- ADICIONAR O NOME DA PESSOA -->
-<h1>Vendas Cadastrados</h1>
-<table class="table">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>CPF</th>
-        <!--                    <th colspan="2">Ações</th>-->
-    </tr>
-    </thead>
-    <tbody><!-- -->
-    <tr th:each="pf : ${pessoasFisicas}"><!-- foreach -->
-        <td th:text="${pf.getId()}"></td> <!-- atributo id-->
-        <td th:text="${pf.getNome()}"></td><!-- atributo name-->
-        <td th:text="${pf.getCpf()}"></td><!-- atributo name-->
-        <!--                    <td> <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
-        <!--                    <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
-    </tr>
-    </tbody>
-</table>
-<button type="button" class="btn btn-primary"> <a th:href="@{/}">Voltar</a></button>
+<body>
 
-<!--        <a th:href="@{/produtos/form}">Salvar</a> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
+<header th:replace="~{home::header}"></header>
+
+<div class="container">
+    <!-- ADICIONAR O NOME DA PESSOA -->
+    <h1>Vendas Cadastrados</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <!--                    <th colspan="2">Ações</th>-->
+        </tr>
+        </thead>
+        <tbody><!-- -->
+        <tr th:each="pf : ${pessoasFisicas}"><!-- foreach -->
+            <td th:text="${pf.getId()}"></td> <!-- atributo id-->
+            <td th:text="${pf.getNome()}"></td><!-- atributo name-->
+            <td th:text="${pf.getCpf()}"></td><!-- atributo name-->
+            <!--                    <td> <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
+            <!--                    <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
+        </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary"> <a th:href="@{/}">Voltar</a></button>
+
+    <!--        <a th:href="@{/produtos/form}">Salvar</a> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
+
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
