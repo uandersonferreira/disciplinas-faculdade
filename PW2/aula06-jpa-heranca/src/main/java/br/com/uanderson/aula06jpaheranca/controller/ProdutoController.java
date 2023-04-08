@@ -3,12 +3,11 @@ package br.com.uanderson.aula06jpaheranca.controller;
 import br.com.uanderson.aula06jpaheranca.model.entity.ItemVenda;
 import br.com.uanderson.aula06jpaheranca.model.entity.Produto;
 import br.com.uanderson.aula06jpaheranca.model.entity.Venda;
-import br.com.uanderson.aula06jpaheranca.model.repository.ItemVendaRepository;
-import br.com.uanderson.aula06jpaheranca.model.repository.ProdutoRepository;
-import br.com.uanderson.aula06jpaheranca.model.repository.VendaRepository;
+import br.com.uanderson.aula06jpaheranca.model.repository.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,12 +28,17 @@ public class ProdutoController {
     private final ProdutoRepository produtoRepository;
     private final ItemVendaRepository itemVendaRepository;
     private final VendaRepository vendaRepository;
+    private  final PessoaFisicaRepository pessoaFisicaRepository;
+    private final PessoaJuridicaRepository pessoaJuridicaRepository;
+    private final Venda venda = new Venda();
 
     @Autowired
-    public ProdutoController(ProdutoRepository produtoRepository, ItemVendaRepository itemVendaRepository, VendaRepository vendaRepository) {
+    public ProdutoController(ProdutoRepository produtoRepository, ItemVendaRepository itemVendaRepository, VendaRepository vendaRepository, PessoaFisicaRepository pessoaFisicaRepository, PessoaJuridicaRepository pessoaJuridicaRepository) {
         this.produtoRepository = produtoRepository;
         this.itemVendaRepository = itemVendaRepository;
         this.vendaRepository = vendaRepository;
+        this.pessoaFisicaRepository = pessoaFisicaRepository;
+        this.pessoaJuridicaRepository = pessoaJuridicaRepository;
     }
 
     @GetMapping("/list")
@@ -86,6 +91,25 @@ public class ProdutoController {
         return new ModelAndView("redirect:/produtos/list");
     }
 
+
+
+    @GetMapping("/carrinho")
+    public String produtosDisponiveis(ModelMap modelMap){
+        modelMap.addAttribute("carrinho", itemVendaRepository.listAll());
+        return "/produto/produtos-disponiveis";
+    }
+    @GetMapping("adicionar/produto/{id}")
+    public ModelAndView addCarrinho(@PathVariable Long id, ModelMap modelMap,HttpSession session){
+        Produto produto = produtoRepository.findById(id);
+        ItemVenda itemVenda = new ItemVenda(1, produto);
+        List<ItemVenda> itensCarrinho = new ArrayList<>();
+        itensCarrinho.add(itemVenda);
+        session.setAttribute("itensCarrinho", itensCarrinho);
+
+//        return new ModelAndView("redirect:produtos/list");
+        return new ModelAndView("produto/produtos-disponiveis", modelMap);
+
+    }
 
 
 
