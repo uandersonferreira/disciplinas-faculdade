@@ -4,10 +4,8 @@ import br.com.uanderson.aula06jpaheranca.model.entity.ItemVenda;
 import br.com.uanderson.aula06jpaheranca.model.entity.Produto;
 import br.com.uanderson.aula06jpaheranca.model.entity.Venda;
 import br.com.uanderson.aula06jpaheranca.model.repository.*;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,18 +26,13 @@ import java.util.List;
 public class ProdutoController {
     private final ProdutoRepository produtoRepository;
     private final ItemVendaRepository itemVendaRepository;
-    private final VendaRepository vendaRepository;
-    private  final PessoaFisicaRepository pessoaFisicaRepository;
-    private final PessoaJuridicaRepository pessoaJuridicaRepository;
-    private final Venda venda = new Venda();
+    private List<ItemVenda> itemVendaList = new ArrayList<>();
+    private Venda venda = new Venda();
 
     @Autowired
-    public ProdutoController(ProdutoRepository produtoRepository, ItemVendaRepository itemVendaRepository, VendaRepository vendaRepository, PessoaFisicaRepository pessoaFisicaRepository, PessoaJuridicaRepository pessoaJuridicaRepository) {
+    public ProdutoController(ProdutoRepository produtoRepository, ItemVendaRepository itemVendaRepository) {
         this.produtoRepository = produtoRepository;
         this.itemVendaRepository = itemVendaRepository;
-        this.vendaRepository = vendaRepository;
-        this.pessoaFisicaRepository = pessoaFisicaRepository;
-        this.pessoaJuridicaRepository = pessoaJuridicaRepository;
     }
 
     @GetMapping("/list")
@@ -94,21 +88,75 @@ public class ProdutoController {
 
 
     @GetMapping("/carrinho")
-    public String produtosDisponiveis(ModelMap modelMap){
-        modelMap.addAttribute("carrinho", itemVendaRepository.listAll());
-        return "/produto/produtos-disponiveis";
+    public ModelAndView chamarCarrinho(){
+        ModelAndView modelAndView = new ModelAndView("produto/carrinho");
+        venda.setItensList(itemVendaList);
+        venda.setLocalDate(LocalDate.now());
+
+        modelAndView.addObject("venda", venda);
+        modelAndView.addObject("itemVendaList", itemVendaList);
+        return modelAndView;
     }
+
+    @GetMapping("/finalizar")
+    public ModelAndView finalizarCompra(){
+        ModelAndView modelAndView = new ModelAndView("produto/carrinho");
+        venda.setItensList(itemVendaList);
+        venda.setLocalDate(LocalDate.now());
+
+        modelAndView.addObject("venda", venda);
+        modelAndView.addObject("itemVendaList", itemVendaList);
+        return modelAndView;
+    }
+
+    @GetMapping("/alterarQuantidade/{id}/{acao}")
+    public String alterarQuantidade(@PathVariable Long id, @PathVariable Integer acao){
+        //SE 1 = ADICIONAR / 0 - DIMINUIR
+        for (ItemVenda item : itemVendaList) {
+            if (item.getProduto().getId().equals(id)){
+                if (acao.equals(1)){
+                    item.setQtd(item.getQtd() + 1);
+                }else if (acao.equals(0)){
+                    item.setQtd(item.getQtd() - 1);
+                    if (item.getQtd() < 0){
+                        item.setQtd(0);
+                    }
+                }
+                break;
+            }
+        }//foreach
+        return "redirect:/produtos/carrinho";
+    }
+    @GetMapping("/removerProduto/{id}")
+    public String removerProduto(@PathVariable Long id){
+        for (ItemVenda item : itemVendaList) {
+            if (item.getProduto().getId().equals(id)){
+                itemVendaList.remove(item);
+                break;
+            }
+        }//foreach
+        return "redirect:/produtos/carrinho";
+    }
+
     @GetMapping("adicionar/produto/{id}")
-    public ModelAndView addCarrinho(@PathVariable Long id, ModelMap modelMap,HttpSession session){
+    public String addCarrinho(@PathVariable Long id){
         Produto produto = produtoRepository.findById(id);
-        ItemVenda itemVenda = new ItemVenda(1, produto);
-        List<ItemVenda> itensCarrinho = new ArrayList<>();
-        itensCarrinho.add(itemVenda);
-        session.setAttribute("itensCarrinho", itensCarrinho);
-
-//        return new ModelAndView("redirect:produtos/list");
-        return new ModelAndView("produto/produtos-disponiveis", modelMap);
-
+        int controle = 0;
+        for (ItemVenda item : itemVendaList) {
+            if (item.getProduto().getId().equals(produto.getId())){
+                item.setQtd(item.getQtd() + 1);
+                controle = 1;
+                break;
+            }
+        }
+        if (controle == 0){
+            ItemVenda item = new ItemVenda();
+            item.setProduto(produto);
+            item.setQtd(item.getQtd() + 1);
+            itemVendaRepository.save(item);
+            itemVendaList.add(item);
+        }
+        return "redirect:/produtos/carrinho";
     }
 
 

@@ -2,8 +2,12 @@ package br.com.uanderson.aula06jpaheranca.model.entity;
 
 import jakarta.persistence.*;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.jpa.repository.Temporal;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,14 +17,15 @@ public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate localDate;
+
+    private LocalDate localDate = LocalDate.now();
     @OneToMany//Uma venda para muitos itensVendas.
     @JoinColumn(name = "id_ItemVenda")
     private List<ItemVenda> itensList;
 
     //UMA PESSOA PODE TER VÁRIAS VENDAS
-    //UMA VENDA PERTENCE APENAS A UMA PESSOA
-    @OneToOne
+    //MUITAS VENDAS PERTENCEM A UMA PESSOA
+    @ManyToOne
     @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 

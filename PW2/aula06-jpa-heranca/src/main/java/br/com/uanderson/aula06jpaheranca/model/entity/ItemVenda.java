@@ -9,18 +9,18 @@ public class ItemVenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne // Muitos itemVenda podem está associados a um produto
-    @JoinColumn(name = "produto_id")
-    private Produto produto;
     private Integer qtd;
-
-    /*
-    @ManyToOne -> Vários itemVenda para um produto
-     */
+    @ManyToOne // Muitos itemVenda podem está associados a um produto
+    private Produto produto;
 
 
+//    @ManyToOne //-> Vários itemVenda para uma Venda
+//    @JoinColumn("id_venda")
+//    private Venda venda;
 
-    public ItemVenda(Integer qtd, Produto produto) {
+
+    public ItemVenda(Long id, Integer qtd, Produto produto) {
+        this.id = id;
         this.qtd = qtd;
         this.produto = produto;
     }
@@ -40,6 +40,17 @@ public class ItemVenda {
         this.id = id;
     }
 
+    public Integer getQtd() {
+        if(qtd == null){
+            qtd = 0;
+        }
+        return qtd;
+    }
+
+    public void setQtd(Integer qtd) {
+        this.qtd = qtd;
+    }
+
     public Produto getProduto() {
         return produto;
     }
@@ -48,11 +59,4 @@ public class ItemVenda {
         this.produto = produto;
     }
 
-    public Integer getQtd() {
-        return qtd;
-    }
-
-    public void setQtd(Integer qtd) {
-        this.qtd = qtd;
-    }
 }//class
