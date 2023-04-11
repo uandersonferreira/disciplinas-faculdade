@@ -26,8 +26,7 @@
 <body>
 <header th:replace="~{home::header}"></header>
 
-<div class="container m-5"  style="border: 1px solid black">
-
+<div class="container m-5" style="border: 1px solid black">
     <div class="row">
         <div class="col-12">
             <div class="table-responsive">
@@ -39,7 +38,6 @@
                         <th scope="col" class="text-center">QTD</th>
                         <th scope="col" class="text-right">Preço</th>
                         <th scope="col" class="text-right">Valor</th>
-                        <th scope="col" class="text-center">Ação</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -48,19 +46,13 @@
                         <td th:text="${i.getProduto().getDescricao()}">Bike</td>
                         <td>
                             <span th:text="${i.getQtd()}"></span>
-                            <a th:href="@{/produtos/alterarQuantidade/{id}/{acao}(id=${i.getProduto().getId()},acao=${0})}" class="btn btn-sm btn-danger m-2"> <i class="fa-solid fa-minus"></i> </a>
-                            <a th:href="@{/produtos/alterarQuantidade/{id}/{acao}(id=${i.getProduto().getId()},acao=${1})}" class="btn btn-sm btn-primary m-2"> <i class="fa-solid fa-plus"></i> </a>
                         </td>
                         <td th:text="${i.getProduto().getValor()}" class="text-right"> </td>
                         <td th:text="${i.total()}" class="text-right"></td>
 
-                        <td class="text-right">
-                            <a th:href="@{/produtos/removerProduto/{id}(id=${i.getProduto().getId()})}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                        </td>
                     </tr>
 
                     <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -77,10 +69,16 @@
         <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-6">
-                    <a th:href="@{/produtos/list}" class="btn btn-lg btn-block btn-primary ">Continuar comprado</a>
+                        <select>
+                            <option selected value="">Selecionar Cliente</option>
+                            <option th:each="c : ${pessoaList}"
+                                    th:value="${c.getId()}"
+                                    th:utext="${c.dados(c)}">
+                            </option>
+                        </select>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
-                    <a th:href="@{/produtos/finalizar}" class="btn btn-lg btn-block btn-success ">Finalizar</a>
+                    <a class="btn btn-lg btn-block btn-success ">Confirma a Compra</a>
                 </div>
             </div>
         </div>

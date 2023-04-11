@@ -1,8 +1,6 @@
 package br.com.uanderson.aula06jpaheranca.controller;
 
-import br.com.uanderson.aula06jpaheranca.model.entity.ItemVenda;
-import br.com.uanderson.aula06jpaheranca.model.entity.Produto;
-import br.com.uanderson.aula06jpaheranca.model.entity.Venda;
+import br.com.uanderson.aula06jpaheranca.model.entity.*;
 import br.com.uanderson.aula06jpaheranca.model.repository.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +24,18 @@ import java.util.List;
 public class ProdutoController {
     private final ProdutoRepository produtoRepository;
     private final ItemVendaRepository itemVendaRepository;
+    private final PessoaFisicaRepository pessoaFisicaRepository;
+    private final PessoaJuridicaRepository pessoaJuridicaRepository;
     private List<ItemVenda> itemVendaList = new ArrayList<>();
     private Venda venda = new Venda();
+    private List<Pessoa> pessoaList = new ArrayList<>();
 
     @Autowired
-    public ProdutoController(ProdutoRepository produtoRepository, ItemVendaRepository itemVendaRepository) {
+    public ProdutoController(ProdutoRepository produtoRepository, ItemVendaRepository itemVendaRepository, PessoaFisicaRepository pessoaFisicaRepository, PessoaJuridicaRepository pessoaJuridicaRepository) {
         this.produtoRepository = produtoRepository;
         this.itemVendaRepository = itemVendaRepository;
+        this.pessoaFisicaRepository = pessoaFisicaRepository;
+        this.pessoaJuridicaRepository = pessoaJuridicaRepository;
     }
 
     @GetMapping("/list")
@@ -100,14 +103,34 @@ public class ProdutoController {
 
     @GetMapping("/finalizar")
     public ModelAndView finalizarCompra(){
-        ModelAndView modelAndView = new ModelAndView("produto/carrinho");
+        ModelAndView modelAndView = new ModelAndView("produto/finalizar");
         venda.setItensList(itemVendaList);
         venda.setLocalDate(LocalDate.now());
+
+        List<PessoaFisica> pessoaFisicas = pessoaFisicaRepository.listAll();
+        List<PessoaJuridica> pessoaJuridicas = pessoaJuridicaRepository.listAll();
+
+        for (PessoaFisica pf : pessoaFisicas) {
+            pessoaList.add(pf);
+        }
+        for (PessoaJuridica pj : pessoaJuridicas) {
+            pessoaList.add(pj);
+        }
+
+        modelAndView.addObject("pessoaList",pessoaList);
 
         modelAndView.addObject("venda", venda);
         modelAndView.addObject("itemVendaList", itemVendaList);
         return modelAndView;
     }
+
+//    @PostMapping("finalizar/confirmar")
+//    public ModelAndView confirmarCompra(){
+//        ModelAndView modelAndView = new ModelAndView("venda/venda-finalizada");
+//        venda.setPessoa();
+//        return modelAndView;
+//    }
+
 
     @GetMapping("/alterarQuantidade/{id}/{acao}")
     public String alterarQuantidade(@PathVariable Long id, @PathVariable Integer acao){
@@ -153,11 +176,11 @@ public class ProdutoController {
             ItemVenda item = new ItemVenda();
             item.setProduto(produto);
             item.setQtd(item.getQtd() + 1);
-            itemVendaRepository.save(item);
             itemVendaList.add(item);
         }
         return "redirect:/produtos/carrinho";
     }
+
 
 
 

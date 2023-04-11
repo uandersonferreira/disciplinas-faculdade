@@ -31,8 +31,13 @@ public class Pessoa implements Serializable {
     public Pessoa() {
     }
 
-    public void dados(){
-
+    public String dados(Pessoa pessoa){
+        if (pessoa instanceof PessoaFisica){
+            return ((PessoaFisica) pessoa).getNome();
+        } else if (pessoa instanceof PessoaJuridica) {
+            return ((PessoaJuridica) pessoa).getRazaoSocial();
+        }
+        return null;
     }
 
     public Long getId() {
