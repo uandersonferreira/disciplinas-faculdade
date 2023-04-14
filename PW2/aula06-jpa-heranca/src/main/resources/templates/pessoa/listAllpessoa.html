@@ -28,27 +28,30 @@
 
 <div class="container">
     <!-- ADICIONAR O NOME DA PESSOA -->
-    <h1>Pessoas Fisicas Cadastrados</h1>
+    <h1>Clientes Cadastrados</h1>
     <table class="table">
         <thead>
         <tr>
             <th>ID</th>
             <th>Nome</th>
-            <th>CPF</th>
             <th>Email</th>
             <th>Fone</th>
             <!--                    <th colspan="2">Ações</th>-->
         </tr>
         </thead>
         <tbody><!-- -->
-        <tr th:each="pf : ${pessoasFisicas}"><!-- foreach -->
-            <td th:text="${pf.getId()}"></td> <!-- atributo id-->
-            <td th:text="${pf.getNome()}"></td> <!-- atributo id-->
-            <td th:text="${pf.getCpf()}"></td><!-- atributo name-->
-            <td th:text="${pf.getEmail()}"></td><!-- atributo name-->
-            <td th:text="${pf.getTelefone()}"></td><!-- atributo name-->
+        <tr th:each="p : ${pessoas}"><!-- foreach -->
+            <td th:text="${p.id}"></td> <!-- atributo id-->
+            <td th:text="${p.nome}"> </td>
+            <td th:text="${p.getEmail()}"></td><!-- atributo name-->
+            <td th:text="${p.getTelefone()}"></td><!-- atributo name-->
+<!--                <span th:if="${p.class.name == 'br.com.uanderson.aula06jpaheranca.model.entity.PessoaFisica'}" th:text="${p.dadosPF(p).getNome()}"></span>-->
+<!--                <span th:if="${p.class.name == 'br.com.uanderson.aula06jpaheranca.model.entity.PessoaJuridica'}" th:text="${p.dadosPJ(p).getCnpj()}"></span>-->
+
+
             <!--                    <td> <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
             <!--                    <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
+<!--            <span th:if="${animal.class.name == 'my.project.Cat'}" th:text="A cat"></span>-->
         </tr>
         </tbody>
     </table>

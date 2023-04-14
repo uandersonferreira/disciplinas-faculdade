@@ -1,9 +1,6 @@
 package br.com.uanderson.aula06jpaheranca.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-
-import java.io.Serializable;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
@@ -33,5 +30,13 @@ public class PessoaJuridica extends Pessoa {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+" PessoaJuridica{" +
+                "razaoSocial='" + razaoSocial + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                '}';
     }
 }//class

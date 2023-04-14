@@ -3,7 +3,6 @@ package br.com.uanderson.aula06jpaheranca.controller;
 import br.com.uanderson.aula06jpaheranca.model.entity.*;
 import br.com.uanderson.aula06jpaheranca.model.repository.*;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -23,20 +22,20 @@ import java.util.List;
 @Log4j2
 public class ProdutoController {
     private final ProdutoRepository produtoRepository;
+    private final PessoaRepository pessoaRepository;
+    private final VendaRepository vendaRepository;
     private final ItemVendaRepository itemVendaRepository;
-    private final PessoaFisicaRepository pessoaFisicaRepository;
-    private final PessoaJuridicaRepository pessoaJuridicaRepository;
     private List<ItemVenda> itemVendaList = new ArrayList<>();
+//    private List<Pessoa> pessoaList = new ArrayList<>();
     private Venda venda = new Venda();
-    private List<Pessoa> pessoaList = new ArrayList<>();
 
-    @Autowired
-    public ProdutoController(ProdutoRepository produtoRepository, ItemVendaRepository itemVendaRepository, PessoaFisicaRepository pessoaFisicaRepository, PessoaJuridicaRepository pessoaJuridicaRepository) {
+    public ProdutoController(ProdutoRepository produtoRepository, PessoaRepository pessoaRepository, VendaRepository vendaRepository, ItemVendaRepository itemVendaRepository) {
         this.produtoRepository = produtoRepository;
+        this.pessoaRepository = pessoaRepository;
+        this.vendaRepository = vendaRepository;
         this.itemVendaRepository = itemVendaRepository;
-        this.pessoaFisicaRepository = pessoaFisicaRepository;
-        this.pessoaJuridicaRepository = pessoaJuridicaRepository;
     }
+
 
     @GetMapping("/list")
     public String listarProdutos(ModelMap modelMap){
@@ -89,15 +88,14 @@ public class ProdutoController {
     }
 
 
-
     @GetMapping("/carrinho")
     public ModelAndView chamarCarrinho(){
         ModelAndView modelAndView = new ModelAndView("produto/carrinho");
-        venda.setItensList(itemVendaList);
-        venda.setLocalDate(LocalDate.now());
+
+        venda.setItensList(itemVendaList);//associando a lista de itens a venda
 
         modelAndView.addObject("venda", venda);
-        modelAndView.addObject("itemVendaList", itemVendaList);
+        modelAndView.addObject("itemVendaList", itemVendaList);//pegando a lista de carrinhos e mandando para finalizar.html
         return modelAndView;
     }
 
@@ -105,31 +103,30 @@ public class ProdutoController {
     public ModelAndView finalizarCompra(){
         ModelAndView modelAndView = new ModelAndView("produto/finalizar");
         venda.setItensList(itemVendaList);
-        venda.setLocalDate(LocalDate.now());
+        List<Pessoa> pessoas = pessoaRepository.listAll();
 
-        List<PessoaFisica> pessoaFisicas = pessoaFisicaRepository.listAll();
-        List<PessoaJuridica> pessoaJuridicas = pessoaJuridicaRepository.listAll();
-
-        for (PessoaFisica pf : pessoaFisicas) {
-            pessoaList.add(pf);
-        }
-        for (PessoaJuridica pj : pessoaJuridicas) {
-            pessoaList.add(pj);
-        }
-
-        modelAndView.addObject("pessoaList",pessoaList);
-
+        modelAndView.addObject("pessoaList", pessoas);
         modelAndView.addObject("venda", venda);
-        modelAndView.addObject("itemVendaList", itemVendaList);
+        modelAndView.addObject("itemVendaList", itemVendaList);// para pegar a page finalizar.html
         return modelAndView;
     }
 
-//    @PostMapping("finalizar/confirmar")
-//    public ModelAndView confirmarCompra(){
-//        ModelAndView modelAndView = new ModelAndView("venda/venda-finalizada");
-//        venda.setPessoa();
-//        return modelAndView;
-//    }
+    @PostMapping("finalizar/confirmar/{id}")
+    public ModelAndView confirmarCompra(@PathVariable Long id){
+        Pessoa pessoa = pessoaRepository.findById(id);
+        venda.setId(null);
+        venda.setLocalDate(LocalDate.now());
+        venda.setPessoa(pessoa);
+
+        vendaRepository.save(venda);
+
+        List<ItemVenda> itensList = venda.getItensList();
+        for (ItemVenda itemVenda : itensList) {
+            itemVendaRepository.save(itemVenda);
+        }
+
+        return new ModelAndView("redirect:/vendas/list");
+    }
 
 
     @GetMapping("/alterarQuantidade/{id}/{acao}")

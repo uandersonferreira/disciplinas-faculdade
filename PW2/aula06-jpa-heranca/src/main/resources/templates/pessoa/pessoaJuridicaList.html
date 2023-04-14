@@ -31,15 +31,21 @@
         <tr>
             <th>ID</th>
             <th>Nome</th>
-            <th>CPF</th>
+            <th>Razão social</th>
+            <th>Email</th>
+            <th>CNPJ</th>
+            <th>Fone</th>
             <!--                    <th colspan="2">Ações</th>-->
         </tr>
         </thead>
         <tbody><!-- -->
         <tr th:each="pj : ${pessoasJuridicas}"><!-- foreach -->
             <td th:text="${pj.getId()}"></td> <!-- atributo id-->
+            <td th:text="${pj.getNome()}"></td> <!-- atributo id-->
+            <td th:text="${pj.getRazaoSocial()}"></td> <!-- atributo id-->
             <td th:text="${pj.getEmail()}"></td><!-- atributo name-->
             <td th:text="${pj.getCnpj()}"></td><!-- atributo name-->
+            <td th:text="${pj.getTelefone()}"></td><!-- atributo name-->
             <!--                    <td> <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
             <!--                    <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
         </tr>

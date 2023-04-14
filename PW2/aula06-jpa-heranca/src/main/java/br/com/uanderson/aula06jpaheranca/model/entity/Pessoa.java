@@ -1,22 +1,26 @@
 package br.com.uanderson.aula06jpaheranca.model.entity;
 
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Scope;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Pessoa implements Serializable {
+@Scope("session")
+public  class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    private String nome;
+
     private String email;
     private String telefone;
-
-    //UMA PESSOA PODE TER VÁRIAS VENDAS
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "pessoa")
     private List<Venda> vendaList;
     //UMA VENDA PERTENCE APENAS A UMA PESSOA
 
@@ -31,21 +35,20 @@ public class Pessoa implements Serializable {
     public Pessoa() {
     }
 
-    public String dados(Pessoa pessoa){
-        if (pessoa instanceof PessoaFisica){
-            return ((PessoaFisica) pessoa).getNome();
-        } else if (pessoa instanceof PessoaJuridica) {
-            return ((PessoaJuridica) pessoa).getRazaoSocial();
-        }
-        return null;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
