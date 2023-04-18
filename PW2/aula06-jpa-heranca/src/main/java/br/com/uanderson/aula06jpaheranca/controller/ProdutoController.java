@@ -111,13 +111,12 @@ public class ProdutoController {
         return modelAndView;
     }
 
-    @PostMapping("finalizar/confirmar/{id}")
-    public ModelAndView confirmarCompra(@PathVariable Long id){
-        Pessoa pessoa = pessoaRepository.findById(id);
+    @PostMapping("/finalizar/confirmar")
+    public ModelAndView confirmarCompra(){
+        Pessoa pessoa = pessoaRepository.listAll().get(0);//SOMENTE PARA TESTE ESTOU SEMPRE ATRIBUINDO A VENDA A 1° PESSOA DO BANCO QUE É RETORNADA.
         venda.setId(null);
         venda.setLocalDate(LocalDate.now());
         venda.setPessoa(pessoa);
-
         vendaRepository.save(venda);
 
         List<ItemVenda> itensList = venda.getItensList();

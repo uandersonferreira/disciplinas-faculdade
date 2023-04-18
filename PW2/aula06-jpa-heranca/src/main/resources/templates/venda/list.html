@@ -34,7 +34,6 @@
             <th>ID</th>
             <th>Data</th>
             <th>Pessoa</th>
-            <th>Produto</th>
             <th>Total</th>
         </tr>
         </thead>
@@ -42,8 +41,7 @@
         <tr th:each="v : ${listVendas}"><!-- foreach -->
             <td th:text="${v.getId()}"></td> <!-- atributo id-->
             <td th:text="${v.getLocalDate()}"></td><!-- atributo name-->
-            <td th:text="${v.getPessoa().getEmail()}"></td><!-- atributo name-->
-            <td th:text="${v.getProdutoItemVenda().getDescricao()}"></td><!-- atributo name-->
+            <td th:text="${v.pessoa.nome}"></td><!-- atributo name-->
             <td th:text="${v.total()}"></td><!-- atributo name-->
             <!--                    <td> <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
             <!--                    <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a> </td>-->

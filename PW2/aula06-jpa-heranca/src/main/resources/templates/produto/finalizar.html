@@ -27,8 +27,9 @@
 <header th:replace="~{home::header}"></header>
 
 <div class="container m-5" style="border: 1px solid black">
-    <div class="row">
-        <div class="col-12">
+    <form th:action="@{/produtos/finalizar/confirmar}" method="post">
+        <div class="row">
+            <div class="col-12">
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -66,27 +67,29 @@
                     </table>
                 </div>
 
-        <div class="col mb-2">
-            <div class="row">
-                <div class="col-sm-12  col-md-6">
-                        <select>
-                            <option selected value="">Selecionar Cliente</option>
-                            <option th:each="p : ${pessoaList}"
-                                    th:value="${p.id}"
-                                    th:utext="${p.nome}">
-                            </option>
-                        </select>
-                </div>
-                <div class="col-sm-12 col-md-6 text-right">
-                    <!--O P ESTÁ VISIVEL APENAS DENTRO DO SELECT CORRIGIR PARA PODER O ID DO CLIENTE-->
-                    <a onclick="return window.confirm('Tem certeza que deseja confirmar esta compra?')"  th:href="@{/produtos/finalizar/confirmar/{id}(id=${p.nome})}">Confirma a Compra</a>
-                    <button type="submit" class="btn btn-lg btn-block btn-success "></button>
-                </div>
+                <div class="col mb-2">
+                    <div class="row">
+                        <div class="col-sm-12  col-md-6">
+                            <select>
+                                <option selected value="">Selecionar Cliente</option>
+                                <option th:each="p : ${pessoaList}"
+                                        name="pessoa"
+                                        th:value="${p}"
+                                        th:text="${p.nome}">
+                                </option>
+                            </select>
+                        </div>
 
+                        <div class="col-sm-12 col-md-6 text-right">
+                            <button type="submit" class="btn btn-lg btn-block btn-success ">Finalizar Compra</button>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+
+    </form>
 </div>
 
 
