@@ -23,16 +23,27 @@ public  class Pessoa implements Serializable {
     @OneToMany(mappedBy = "pessoa")
     private List<Venda> vendaList;
     //UMA VENDA PERTENCE APENAS A UMA PESSOA
+    @OneToOne(mappedBy = "pessoa")
+    private Endereco endereco;
 
 
-    public Pessoa(Long id, String email, String telefone, List<Venda> vendaList) {
+    public Pessoa(Long id, String nome, String email, String telefone, List<Venda> vendaList) {
         this.id = id;
+        this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.vendaList = vendaList;
     }
 
     public Pessoa() {
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public Long getId() {
@@ -73,5 +84,17 @@ public  class Pessoa implements Serializable {
 
     public void setVendaList(List<Venda> vendaList) {
         this.vendaList = vendaList;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", vendaList=" + vendaList +
+                '}';
     }
 }//class

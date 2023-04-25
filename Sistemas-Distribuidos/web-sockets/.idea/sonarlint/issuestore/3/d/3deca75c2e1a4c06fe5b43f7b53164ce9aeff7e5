@@ -1,0 +1,20 @@
+
+`	java:S112."FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+0
+java:S1220""Move this file to a named package.
+p
+java:S1450"[Remove the "clientSocket" field and declare it as a local variable in the relevant methods.(ó’ª~
+`
+java:S1124
+"EReorder the modifiers to comply with the Java Language Specification.(¼ Øúÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ÿˆÉµùÿÿÿÿ
+‡
+java:S1130"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(–Æ£«úÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(£€€ˆıÿÿÿÿ
+Q	java:S125""<This block of commented-out lines of code should be removed.(»ãøá
+N	java:S106-"9Replace this use of System.out or System.err by a logger.(™ƒñ²
+N	java:S1060"9Replace this use of System.out or System.err by a logger.(¬ü…î
+H
+java:S1128"3Remove this unused import 'java.io.BufferedWriter'.(¬õº/
+M
+java:S1128"7Remove this unused import 'java.io.OutputStreamWriter'.(Ÿ“¸

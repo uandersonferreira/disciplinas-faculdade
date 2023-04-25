@@ -15,7 +15,6 @@ public class ItemVenda {
 
 
 //    @ManyToOne //-> Vários itemVenda para uma Venda
-//    @JoinColumn("id_venda")
 //    private Venda venda;
 
 

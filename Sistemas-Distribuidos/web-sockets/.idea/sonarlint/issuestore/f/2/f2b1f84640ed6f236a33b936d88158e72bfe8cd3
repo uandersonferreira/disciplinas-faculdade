@@ -1,0 +1,15 @@
+
+`	java:S112%"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+0
+java:S1220""Move this file to a named package.
+=
+java:S2189""Add an end condition to this loop.(˜ïˆžÿÿÿÿÿ
+r
+java:S1450"]Remove the "bufferedReader" field and declare it as a local variable in the relevant methods.(ˆ±€l
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ÇÞ³Ò
+N	java:S106"9Replace this use of System.out or System.err by a logger.(ÇÞÉÚ
+N	java:S106"9Replace this use of System.out or System.err by a logger.( éµ‰
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ªÕ—•üÿÿÿÿ
+S	java:S106$"9Replace this use of System.out or System.err by a logger.(„™‰ƒúÿÿÿÿ
+S	java:S106("9Replace this use of System.out or System.err by a logger.(»•¤—øÿÿÿÿ

@@ -9,10 +9,11 @@ public class PessoaFisica extends Pessoa  {
 
     private String cpf;
 
-    public PessoaFisica(Long id, String email, String telefone, List<Venda> vendaList, String cpf) {
-        super(id, email, telefone, vendaList);
+    public PessoaFisica(Long id, String nome, String email, String telefone, List<Venda> vendaList, String cpf) {
+        super(id, nome, email, telefone, vendaList);
         this.cpf = cpf;
     }
+
 
     public PessoaFisica() {}
 

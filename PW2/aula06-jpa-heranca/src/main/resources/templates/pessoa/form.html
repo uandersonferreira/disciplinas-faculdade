@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR"  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<link th:replace="~{home::font-awesome}">
+	<title>Formulário Pessoas</title>
+</head>
+<body>
+<header th:replace="~{home::header}"></header>
+
+<div class="container">
+	<h1 style="display:flex;">
+		Cadastrar &nbsp;
+		<span id="titulo_pessoa_fisica" style="display: none;">Pessoa Física</span>
+		<span id="titulo_pessoa_juridica" style="display: none;">Pessoa Juridica</span>
+	</h1>
+
+	<form th:action="@{/pessoas/save}" th:object="${pessoa}" method="post" >
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="nome">Nome</label>
+				<input type="text" name="nome" id="nome" class="form-control" placeholder="Nome completo">
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="email">Email</label>
+				<input type="text" name="email" id="email" class="form-control" placeholder="E-mail">
+			</div>
+		</div>
+
+		<!--Endereço-->
+		<div class="form-row">
+			<div class="form-group col-md-5">
+				<label for="complemento">Complemento</label>
+				<input type="text" class="form-control" name="complemento" id="complemento" placeholder="ex: Rua dos Bobos, nº 0">
+			</div>
+			<div class="form-group col-md-3">
+				<label for="bairro">Bairro</label>
+				<input type="text" class="form-control" name="bairro" id="bairro" placeholder="ex: São João da Vila">
+			</div>
+
+			<div class="form-group col-md-4">
+				<label for="telefone">Telefone</label>
+				<input type="text" name="telefone" id="telefone" class="form-control" placeholder="Telefone">
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col-md-4">
+				<label for="logradouro">Logradouro</label>
+				<input type="text" class="form-control" name="logradouro" id="logradouro">
+			</div>
+
+			<div class="form-group col-md-4">
+				<label for="cidade">Cidade</label>
+				<select id="cidade" name="cidade" class="form-control">
+					<option th:each="cidade :${listaCidades}"
+							th:value="${cidade.nome}" th:text="${cidade.nome}">
+					</option>
+				</select>
+			</div>
+
+			<div class="form-group col-md-4">
+				<label for="cep">CEP</label>
+				<input type="text" class="form-control" name="cep" id="cep">
+			</div>
+		</div>
+
+		<!--SELEÇÃO PESSOA -->
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<input type="radio" name="tipoPessoa" id="tipo_pessoa-fisica" value="1" onchange="formPessoaFisica();">Pessoa Física
+			</div>
+
+			<div class="form-group col-md-6">
+				<input type="radio" name="tipoPessoa" id="tipo_pessoa-juridica" value="2" onchange="formPessoaJuridica();">Pessoa
+				Jurídica
+			</div>
+
+			<div class="form-group col-md-12" id="form-pessoa-fisica" style="display: none;">
+				<label for="cpf">CPF</label>
+				<input type="text" name="cpf" id="cpf" class="form-group col-md-4" placeholder="cpf">
+			</div>
+
+			<div class="form-group col-md-12" id="form-pessoa-juridica" style="display: none;">
+				<label for="razaoSocial">Razão social</label>
+				<input type="text" name="razaoSocial" id="razaoSocial" class="form-group col-md-4" placeholder="Razão Social">
+
+				<label for="cnpj">CNPJ</label>
+				<input type="text" name="cnpj" id="cnpj" class="form-group col-md-4" placeholder="cnpj">
+			</div>
+
+		</div><!--form-row-->
+
+		<!--BOTÃO SUBMIT-->
+		<div id="form-btn-cadastrar" style="display: none;">
+			<input type="submit" name="enviar" value="Cadastrar"><br><br>
+		</div>
+
+	</form>
+</div>
+
+	<script>
+		function formPessoaFisica(){
+			document.getElementById("titulo_pessoa_fisica").style.display = 'block';
+			document.getElementById("titulo_pessoa_juridica").style.display = 'none';
+
+			document.getElementById("form-pessoa-fisica").style.display = 'block';
+			document.getElementById("form-pessoa-juridica").style.display = 'none';
+
+			document.getElementById("form-btn-cadastrar").style.display = 'block';
+
+		}
+
+		function formPessoaJuridica(){
+			document.getElementById("titulo_pessoa_fisica").style.display = 'none';
+			document.getElementById("titulo_pessoa_juridica").style.display = 'block';
+
+			document.getElementById("form-pessoa-fisica").style.display = 'none';
+			document.getElementById("form-pessoa-juridica").style.display = 'block';
+
+			document.getElementById("form-btn-cadastrar").style.display = 'block';
+
+		}
+	</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous">
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+</div>
+</body>
+</html>
+
+<!--
+th:field=*{atributo} - Quando Temos um objeto que já
+possui dados é queremos exibir para poder editar.
+
+th:text="" - Quando queremos exibir os dados de um objeto
+-->
