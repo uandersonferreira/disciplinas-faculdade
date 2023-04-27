@@ -53,7 +53,7 @@ public class PessoaController {
 
     @GetMapping("/form")
     public ModelAndView cadastrar(Pessoa pessoa){
-        ModelAndView mv = new ModelAndView("pessoa/form");
+        ModelAndView mv = new ModelAndView("formPessoaJuridica");
         mv.addObject("pessoa",pessoa);//manda o objeto funcionário para a view cadastro.html
         mv.addObject("listaCidades", cidadeRepository.listAll());
         return mv;
@@ -61,16 +61,13 @@ public class PessoaController {
 
 
     @PostMapping("/save")
-    public ModelAndView salvar(Pessoa pessoa, Endereco endereco, String cpf, String cnpj, String razaoSocial, String tipoPessoa, BindingResult bindingResult){
+    public ModelAndView salvar(Pessoa pessoa, String cpf, String cnpj, String razaoSocial, String tipoPessoa, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return cadastrar(pessoa);//Retorna a pessoa para a page de cadrastro, preservando os dados do objeto/Funcionario
             //que tentou realizar a ação.
         }
-
-        enderecoRepository.save(endereco);
-
         System.out.println(pessoa);
-        System.out.println(endereco);
+        System.out.println(pessoa.getEndereco());
         System.out.printf("CPF: %s | CNPJ: %s | RAZÃO SOCIAL: %s",cpf ,cnpj , razaoSocial);
 
         //TIPO PESSOA 1-FISICA | 2-JURIDICA
@@ -80,8 +77,10 @@ public class PessoaController {
             pessoaFisica.setNome(pessoa.getNome());
             pessoaFisica.setEmail(pessoa.getEmail());
             pessoaFisica.setTelefone(pessoa.getTelefone());
+            pessoaFisica.setEndereco(pessoa.getEndereco());
             pessoaFisica.setCpf(cpf);
 
+            enderecoRepository.save(pessoa.getEndereco());
             pessoaFisicaRepository.save(pessoaFisica);
 
         } else if (tipoPessoa.equals("2")) {
@@ -90,21 +89,39 @@ public class PessoaController {
             pessoaJuridica.setNome(pessoa.getNome());
             pessoaJuridica.setEmail(pessoa.getEmail());
             pessoaJuridica.setTelefone(pessoa.getTelefone());
+            pessoaJuridica.setEndereco(pessoa.getEndereco());
             pessoaJuridica.setRazaoSocial(razaoSocial);
             pessoaJuridica.setCnpj(cnpj);
 
+            enderecoRepository.save(pessoa.getEndereco());
             pessoaJuridicaRepository.save(pessoaJuridica);
         }
         return cadastrar(new Pessoa());//É retornar a page de cadastro com um novo funcionário vazio;
     }//salvar
 
+    @GetMapping("/remove/{id}")
+    public ModelAndView remove(@PathVariable("id") Long id){
+        pessoaRepository.removeById(id);
+        return new ModelAndView("redirect:/pessoas/list");
+    }
+
 
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("produto", pessoaRepository.findById(id));
-        return new ModelAndView("/produto/form", model);//view form.html
+        Pessoa pessoa = pessoaRepository.findById(id);
+        System.out.println(pessoa);
+        System.out.println(pessoa.getEndereco());
+
+        model.addAttribute("pessoa", pessoaRepository.findById(id));
+        return new ModelAndView("formPessoaJuridica", model);//view formPessoaJuridica.html
     }
 
+    @PostMapping("/update")
+    public ModelAndView update(Pessoa pessoa) {
+        pessoaRepository.update(pessoa);
+        enderecoRepository.update(pessoa.getEndereco());
+        return new ModelAndView("redirect:/pessoas/list");
+    }
 
 
 

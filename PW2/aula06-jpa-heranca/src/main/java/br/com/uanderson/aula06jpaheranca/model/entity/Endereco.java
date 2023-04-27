@@ -17,14 +17,29 @@ public class Endereco implements Serializable {
     private String complemento;
     private String bairro;
     @ManyToOne
+    @JoinColumn(name = "cidade_id")
     private Cidade cidade;
-    @OneToOne()
-    private Pessoa pessoa;
+
 
     public Endereco() {
     }
 
+    public Endereco(Long id, String cep, String logradouro, String complemento, String bairro, Cidade cidade) {
+        this.id = id;
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cidade = cidade;
+    }
 
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
 
     public Long getId() {
         return id;

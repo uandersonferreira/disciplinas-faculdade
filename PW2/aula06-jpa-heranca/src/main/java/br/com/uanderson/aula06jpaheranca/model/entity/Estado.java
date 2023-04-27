@@ -3,6 +3,7 @@ package br.com.uanderson.aula06jpaheranca.model.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,9 +15,6 @@ public class Estado implements Serializable {
 
     private String nome;
     private String sigla;
-    @OneToMany
-    @JoinColumn
-    private List<Cidade> cidades;
 
     public Estado(Long id, String nome, String sigla) {
         this.id = id;

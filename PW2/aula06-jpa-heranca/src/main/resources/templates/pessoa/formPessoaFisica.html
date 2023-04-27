@@ -9,7 +9,9 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 		  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+	<link th:replace="~{home::bootstrap}">
 	<link th:replace="~{home::font-awesome}">
+
 	<title>Formulário Pessoas</title>
 </head>
 <body>
@@ -17,21 +19,28 @@
 
 <div class="container">
 	<h1 style="display:flex;">
-		Cadastrar &nbsp;
+		Salvar &nbsp;
 		<span id="titulo_pessoa_fisica" style="display: none;">Pessoa Física</span>
 		<span id="titulo_pessoa_juridica" style="display: none;">Pessoa Juridica</span>
 	</h1>
 
-	<form th:action="@{/pessoas/save}" th:object="${pessoa}" method="post" >
+	<form th:action="${pessoaFisica.id == null} ? @{/pessoas/fisica/save} : @{/pessoas/fisica/update} "
+		  th:object="${pessoaFisica}" method="post" >
+
+		<div class="form-group">
+			<label for="id">Id</label>
+			<input class="form-control" type="number" id="id" th:field="*{id}" readonly="readonly" placeholder="Id Gerado Automático">
+		</div>
+
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="nome">Nome</label>
-				<input type="text" name="nome" id="nome" class="form-control" placeholder="Nome completo">
+				<input type="text" name="nome" id="nome" th:field="*{nome}" class="form-control" placeholder="Nome completo">
 			</div>
 
 			<div class="form-group col-md-6">
 				<label for="email">Email</label>
-				<input type="text" name="email" id="email" class="form-control" placeholder="E-mail">
+				<input type="text" name="email" id="email" th:field="*{email}" class="form-control" placeholder="E-mail">
 			</div>
 		</div>
 
@@ -39,44 +48,44 @@
 		<div class="form-row">
 			<div class="form-group col-md-5">
 				<label for="complemento">Complemento</label>
-				<input type="text" class="form-control" name="complemento" id="complemento" placeholder="ex: Rua dos Bobos, nº 0">
+				<input type="text" class="form-control" th:field="*{endereco.complemento}" name="complemento" id="complemento" placeholder="ex: Rua dos Bobos, nº 0">
 			</div>
 			<div class="form-group col-md-3">
 				<label for="bairro">Bairro</label>
-				<input type="text" class="form-control" name="bairro" id="bairro" placeholder="ex: São João da Vila">
+				<input type="text" class="form-control" th:field="*{endereco.bairro}" name="bairro" id="bairro" placeholder="ex: São João da Vila">
 			</div>
 
 			<div class="form-group col-md-4">
 				<label for="telefone">Telefone</label>
-				<input type="text" name="telefone" id="telefone" class="form-control" placeholder="Telefone">
+				<input type="text" name="telefone" id="telefone" th:field="*{telefone}" class="form-control" placeholder="Telefone">
 			</div>
 		</div>
 
 		<div class="form-row">
 			<div class="form-group col-md-4">
 				<label for="logradouro">Logradouro</label>
-				<input type="text" class="form-control" name="logradouro" id="logradouro">
+				<input type="text" class="form-control" th:field="*{endereco.logradouro}" name="logradouro" id="logradouro">
 			</div>
 
 			<div class="form-group col-md-4">
 				<label for="cidade">Cidade</label>
-				<select id="cidade" name="cidade" class="form-control">
+				<select id="cidade" th:field="*{endereco.cidade.id}" name="cidade" class="form-control">
 					<option th:each="cidade :${listaCidades}"
-							th:value="${cidade.nome}" th:text="${cidade.nome}">
+							th:value="${cidade.id}" th:text="${cidade.nome}">
 					</option>
 				</select>
 			</div>
 
 			<div class="form-group col-md-4">
 				<label for="cep">CEP</label>
-				<input type="text" class="form-control" name="cep" id="cep">
+				<input type="text" class="form-control" th:field="*{endereco.cep}" name="cep" id="cep">
 			</div>
 		</div>
 
 		<!--SELEÇÃO PESSOA -->
 		<div class="form-row">
 			<div class="form-group col-md-6">
-				<input type="radio" name="tipoPessoa" id="tipo_pessoa-fisica" value="1" onchange="formPessoaFisica();">Pessoa Física
+				<input type="radio" name="tipoPessoa" id="tipo_pessoa-fisica"  value="1" onchange="formPessoaFisica();">Pessoa Física
 			</div>
 
 			<div class="form-group col-md-6">
@@ -86,12 +95,12 @@
 
 			<div class="form-group col-md-12" id="form-pessoa-fisica" style="display: none;">
 				<label for="cpf">CPF</label>
-				<input type="text" name="cpf" id="cpf" class="form-group col-md-4" placeholder="cpf">
+				<input type="text" name="cpf" id="cpf" th:field="*{cpf}" class="form-group col-md-4" placeholder="cpf">
 			</div>
 
-			<div class="form-group col-md-12" id="form-pessoa-juridica" style="display: none;">
+			<div class="form-group col-md-12" id="form-pessoa-juridica"  style="display: none;">
 				<label for="razaoSocial">Razão social</label>
-				<input type="text" name="razaoSocial" id="razaoSocial" class="form-group col-md-4" placeholder="Razão Social">
+				<input type="text" name="razaoSocial" id="razaoSocial"  class="form-group col-md-4" placeholder="Razão Social">
 
 				<label for="cnpj">CNPJ</label>
 				<input type="text" name="cnpj" id="cnpj" class="form-group col-md-4" placeholder="cnpj">
@@ -101,7 +110,7 @@
 
 		<!--BOTÃO SUBMIT-->
 		<div id="form-btn-cadastrar" style="display: none;">
-			<input type="submit" name="enviar" value="Cadastrar"><br><br>
+			<input type="submit" name="enviar" value="salvar"><br><br>
 		</div>
 
 	</form>

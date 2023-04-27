@@ -27,7 +27,7 @@
 <header th:replace="~{home::header}"></header>
 
 <div class="container m-5" style="border: 1px solid black">
-    <form th:action="@{/produtos/finalizar/confirmar}" method="post">
+    <form th:action="@{/produtos/finalizar/confirmar/endereco}" method="post">
         <div class="row">
             <div class="col-12">
                 <div class="table-responsive">
@@ -42,7 +42,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="i : ${itemVendaList}">
+                        <tr th:each="i : ${venda.getItensList()}">
                             <td th:text="${i.getProduto().getId()}"></td>
                             <td th:text="${i.getProduto().getDescricao()}">Bike</td>
                             <td>
@@ -72,20 +72,19 @@
                         <div class="col-sm-12  col-md-6">
                             <label for="pessoa">Cliente</label>
                             <select id="pessoa" th:field="*{venda.pessoa}" name="pessoa" class="form-control">
-                                <option th:each="p :${pessoaList}"
-                                        th:value="${p.id}" th:text="${p.nome}">
+                                <option th:value="${venda.pessoa.id}" th:text="${venda.pessoa.nome}">
                                 </option>
                             </select>
                         </div>
 
-<!--                        <div class="col-sm-12  col-md-6">-->
-<!--                            <label for="endereco">Endereço</label>-->
-<!--                            <select id="endereco" th:field="*{venda.pessoa.endereco}" name="pessoa" class="form-control">-->
-<!--                                <option th:each="e :${enderecos}"-->
-<!--                                        th:value="${e.id}" th:text="${e.complemento}">-->
-<!--                                </option>-->
-<!--                            </select>-->
-<!--                        </div>-->
+                        <div class="col-sm-12  col-md-6">
+                            <label for="endereco">Endereço</label>
+                            <select id="endereco" th:field="*{enderecos}" name="pessoa" class="form-control">
+                                <option th:each="e :${enderecos}"
+                                        th:value="${e.id}" th:text="${e.cidade}">
+                                </option>
+                            </select>
+                        </div>
 
                     </div>
 

@@ -36,7 +36,8 @@
             <th>Nome</th>
             <th>Email</th>
             <th>Fone</th>
-            <!--                    <th colspan="2">Ações</th>-->
+<!--            <th>Cidade</th>-->
+            <th colspan="2">Ações</th>
         </tr>
         </thead>
         <tbody><!-- -->
@@ -45,13 +46,12 @@
             <td th:text="${p.nome}"> </td>
             <td th:text="${p.getEmail()}"></td><!-- atributo name-->
             <td th:text="${p.getTelefone()}"></td><!-- atributo name-->
-<!--                <span th:if="${p.class.name == 'br.com.uanderson.aula06jpaheranca.model.entity.PessoaFisica'}" th:text="${p.dadosPF(p).getNome()}"></span>-->
-<!--                <span th:if="${p.class.name == 'br.com.uanderson.aula06jpaheranca.model.entity.PessoaJuridica'}" th:text="${p.dadosPJ(p).getCnpj()}"></span>-->
+<!--            <td th:text="${p.endereco.cidade.nome}"></td>&lt;!&ndash; atributo name&ndash;&gt;-->
+<!--            <span th:if="${p.class.name == 'br.com.uanderson.aula06jpaheranca.model.entity.PessoaFisica'}" th:text="${p.dadosPF(p).getNome()}"></span>-->
+<!--            <span th:if="${p.class.name == 'br.com.uanderson.aula06jpaheranca.model.entity.PessoaJuridica'}" th:text="${p.dadosPJ(p).getCnpj()}"></span>-->
 
-
-            <!--                    <td> <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
-            <!--                    <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
-<!--            <span th:if="${animal.class.name == 'my.project.Cat'}" th:text="A cat"></span>-->
+            <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td> <!--pessoas/edit/1 - CONTROLLER -->
+            <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>
         </tr>
         </tbody>
     </table>
@@ -60,7 +60,6 @@
     </button>
     <button type="button" class="btn btn-primary"> <a th:href="@{/}">Voltar</a></button>
 
-    <!--        <a th:href="@{/produtos/form}">Salvar</a> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
 
 </div>
 

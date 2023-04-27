@@ -61,7 +61,7 @@ public class ProdutoController {
         produtoRepository.save(produto);
         return new ModelAndView("redirect:/produtos/list");
         /*
-        Ao realizar o submit do form.html irá se chamado o metodo save por de baixo dos panos
+        Ao realizar o submit do formPessoaJuridica.html irá se chamado o metodo save por de baixo dos panos
         para pode salvar e quando aciona o /save realiza-se um redirecionamento automático para
         para a lista de produtos através da chamado do method do controller /produtos/list.
          */
@@ -78,7 +78,7 @@ public class ProdutoController {
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("produto", produtoRepository.findById(id));
-        return new ModelAndView("/produto/form", model);//view form.html
+        return new ModelAndView("/produto/form", model);//view formPessoaJuridica.html
     }
 
     @PostMapping("/update")
@@ -112,17 +112,20 @@ public class ProdutoController {
     }
 
     @PostMapping("/finalizar/confirmar")
-    public ModelAndView confirmarCompra(){
-        Pessoa pessoa = pessoaRepository.listAll().get(0);//SOMENTE PARA TESTE ESTOU SEMPRE ATRIBUINDO A VENDA A 1° PESSOA DO BANCO QUE É RETORNADA.
+    public ModelAndView confirmarCompra(Long pessoa){
+//        Pessoa pessoa = pessoaRepository.listAll().get(0);//SOMENTE PARA TESTE ESTOU SEMPRE ATRIBUINDO A VENDA A 1° PESSOA DO BANCO QUE É RETORNADA.
+        Pessoa pessoaEncontrada = pessoaRepository.findById(pessoa);
         venda.setId(null);
         venda.setLocalDate(LocalDate.now());
-        venda.setPessoa(pessoa);
+        venda.setPessoa(pessoaEncontrada);
         vendaRepository.save(venda);
 
         List<ItemVenda> itensList = venda.getItensList();
         for (ItemVenda itemVenda : itensList) {
             itemVendaRepository.save(itemVenda);
         }
+        
+        itemVendaList = new ArrayList<>();//PARA LIMPAR O CARRINHO APÓS REALZIAR A VENDA
 
         return new ModelAndView("redirect:/vendas/list");
     }

@@ -25,7 +25,7 @@ public class Venda {
 
     //UMA PESSOA PODE TER VÁRIAS VENDAS
     //MUITAS VENDAS PERTENCEM A UMA PESSOA
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 

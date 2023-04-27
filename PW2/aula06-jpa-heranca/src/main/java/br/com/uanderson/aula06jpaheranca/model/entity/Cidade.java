@@ -11,8 +11,6 @@ public class Cidade implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
     private String nome;
-    @ManyToOne()
-    private Endereco endereco;
     @OneToOne
     private Estado estado;
 

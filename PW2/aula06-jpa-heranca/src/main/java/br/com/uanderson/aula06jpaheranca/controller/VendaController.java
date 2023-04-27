@@ -5,6 +5,7 @@ import br.com.uanderson.aula06jpaheranca.model.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import java.util.List;
 @Controller
 @RequestMapping("vendas")
 @Scope("request")
+@Transactional
 public class VendaController {
    private final VendaRepository vendaRepository;
 

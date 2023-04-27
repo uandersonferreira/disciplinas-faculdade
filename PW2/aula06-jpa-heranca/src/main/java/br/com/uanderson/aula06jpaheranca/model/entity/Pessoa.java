@@ -20,19 +20,19 @@ public  class Pessoa implements Serializable {
 
     private String email;
     private String telefone;
-    @OneToMany(mappedBy = "pessoa")
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Venda> vendaList;
     //UMA VENDA PERTENCE APENAS A UMA PESSOA
-    @OneToOne(mappedBy = "pessoa")
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
-
-    public Pessoa(Long id, String nome, String email, String telefone, List<Venda> vendaList) {
+    public Pessoa(Long id, String nome, String email, String telefone, List<Venda> vendaList, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.vendaList = vendaList;
+        this.endereco = endereco;
     }
 
     public Pessoa() {

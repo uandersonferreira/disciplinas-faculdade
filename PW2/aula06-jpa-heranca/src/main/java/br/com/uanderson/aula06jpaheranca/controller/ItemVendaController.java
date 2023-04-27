@@ -7,6 +7,7 @@ import br.com.uanderson.aula06jpaheranca.model.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("itemvenda")
 @Scope("request")
+@Transactional
 public class ItemVendaController {
     private  final ItemVendaRepository itemVendaRepository;
 
@@ -60,7 +62,7 @@ public class ItemVendaController {
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("itensVenda", itemVendaRepository.findById(id));
-        return new ModelAndView("itensVenda/form", model);//view form.html
+        return new ModelAndView("itensVenda/form", model);//view formPessoaJuridica.html
     }
 
     @PostMapping("/update")
