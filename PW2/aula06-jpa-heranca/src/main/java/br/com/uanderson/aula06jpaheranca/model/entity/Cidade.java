@@ -11,12 +11,13 @@ public class Cidade implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
     private String nome;
-    @OneToOne
+    @ManyToOne()
     private Estado estado;
 
-    public Cidade(Long id, String nome) {
+    public Cidade(Long id, String nome, Estado estado) {
         this.id = id;
         this.nome = nome;
+        this.estado = estado;
     }
 
     public Cidade() {
@@ -38,6 +39,13 @@ public class Cidade implements Serializable {
         this.nome = nome;
     }
 
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 
     @Override
     public String toString() {

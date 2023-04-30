@@ -2,25 +2,26 @@ package br.com.uanderson.aula06jpaheranca.model.entity;
 
 import jakarta.persistence.*;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.jpa.repository.Temporal;
+import org.springframework.stereotype.Component;
 
-import java.time.Instant;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
 
+
+//@Scope("session")
 @Entity
-@Scope("session")
-public class Venda {
+@Component
+public class Venda implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate localDate = LocalDate.now();
-    @OneToMany//Uma venda para muitos itensVendas.
-    @JoinColumn(name = "id_ItemVenda")
+    private LocalDate localDate;
+    private Double totalVenda;
+    @OneToMany()//Uma venda para muitos itensVendas. mappedBy = "venda", cascade = CascadeType.PERSIST
+    @JoinColumn(name = "id_itemVenda")
     private List<ItemVenda> itensList;
 
     //UMA PESSOA PODE TER VÁRIAS VENDAS
@@ -29,20 +30,22 @@ public class Venda {
     @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 
-    public Venda(Long id, LocalDate localDate, List<ItemVenda> itensList, Pessoa pessoa) {
+    public Venda(Long id, LocalDate localDate, Double totalVenda, List<ItemVenda> itensList, Pessoa pessoa) {
         this.id = id;
         this.localDate = localDate;
+        this.totalVenda = totalVenda;
         this.itensList = itensList;
         this.pessoa = pessoa;
     }
+
     public Venda() {
     }
 
     public Double total(){
-    double valor = 0;
+        double valor = 0;
         for (ItemVenda itemVenda : itensList) {
-             double total = itemVenda.total();
-             valor += total;
+            double total = itemVenda.total();
+            valor += total;
         }
         return  valor;
         /*
@@ -73,6 +76,15 @@ public class Venda {
     @Override
     public int hashCode() {
         return Objects.hash(id, localDate, itensList);
+    }
+
+
+    public Double getTotalVenda() {
+        return totalVenda;
+    }
+
+    public void setTotalVenda(Double totalVenda) {
+        this.totalVenda = totalVenda;
     }
 
     public Long getId() {

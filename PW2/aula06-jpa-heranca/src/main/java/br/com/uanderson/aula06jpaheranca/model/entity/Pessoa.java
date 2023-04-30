@@ -20,7 +20,7 @@ public  class Pessoa implements Serializable {
 
     private String email;
     private String telefone;
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.PERSIST)
     private List<Venda> vendaList;
     //UMA VENDA PERTENCE APENAS A UMA PESSOA
     @OneToOne(cascade = CascadeType.ALL)

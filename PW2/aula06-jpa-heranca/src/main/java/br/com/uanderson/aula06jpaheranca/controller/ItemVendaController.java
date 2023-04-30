@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("itemvenda")
-@Scope("request")
 @Transactional
 public class ItemVendaController {
     private  final ItemVendaRepository itemVendaRepository;

@@ -27,7 +27,7 @@
 <header th:replace="~{home::header}"></header>
 
 <div class="container m-5" style="border: 1px solid black">
-    <form th:action="@{/produtos/finalizar/confirmar}" method="post">
+    <form th:action="@{/vendas/finalizar/confirmar}" method="post">
         <div class="row">
             <div class="col-12">
                 <div class="table-responsive">
@@ -42,7 +42,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="i : ${itemVendaList}">
+                        <tr th:each="i : ${session.venda.getItensList()}">
                             <td th:text="${i.getProduto().getId()}"></td>
                             <td th:text="${i.getProduto().getDescricao()}">Bike</td>
                             <td>
@@ -59,7 +59,7 @@
                             <td></td>
                             <td><strong>Total</strong></td>
                             <td class="text-right">
-                                R$<strong th:text="${venda.total()}"></strong>
+                                R$<strong th:text="${session.venda.total()}"></strong>
                             </td>
                         </tr>
 
@@ -77,15 +77,6 @@
                                 </option>
                             </select>
                         </div>
-
-<!--                        <div class="col-sm-12  col-md-6">-->
-<!--                            <label for="endereco">Endereço</label>-->
-<!--                            <select id="endereco" th:field="*{venda.pessoa.endereco}" name="pessoa" class="form-control">-->
-<!--                                <option th:each="e :${enderecos}"-->
-<!--                                        th:value="${e.id}" th:text="${e.complemento}">-->
-<!--                                </option>-->
-<!--                            </select>-->
-<!--                        </div>-->
 
                     </div>
 

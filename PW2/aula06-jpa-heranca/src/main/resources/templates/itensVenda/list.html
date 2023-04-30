@@ -33,6 +33,8 @@
             <th>Produto</th>
             <th>Valor Produto</th>
             <th>QTD</th>
+            <th>Venda</th>
+            <th>Pessoa</th>
             <th>Total</th>
             <th colspan="2">Ações</th>
         </tr>
@@ -42,8 +44,9 @@
             <td th:text="${itens.getId()}"></td> <!-- atributo id-->
             <td th:text="${itens.getProduto().getDescricao()}"></td><!-- atributo name-->
             <td th:text="${itens.getProduto().getValor()}"></td><!-- atributo name-->
-            <!--            <td th:text="${itens.getProduto().getId()}"></td>&lt;!&ndash; atributo name&ndash;&gt;-->
             <td th:text="${itens.getQtd()}"></td><!-- atributo name-->
+            <td th:text="${itens.venda.id}"></td><!-- atributo name-->
+            <td th:text="${itens.venda.pessoa.nome}"></td><!-- atributo name-->
             <td th:text="${itens.total()}"></td><!-- atributo name-->
 <!--            <td> <a style="color: green" th:href="@{/itemvenda/edit/{id}(id=${itens.id})}"><i class="fa-solid fa-cart-shopping"></i></a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
             <td> <a th:href="@{/itemvenda/edit/{id}(id=${itens.id})}"><i class="fa-solid fa-pen-to-square "></i></a> </td> <!--pessoas/edit/1 - CONTROLLER -->
