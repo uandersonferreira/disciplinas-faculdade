@@ -1,0 +1,41 @@
+<header th:fragment="header">
+    <nav class="navbar bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <span class="text-white">&lt;<span class="text-success">H</span>-ome&gt;</IF-Developer></span>
+            </a>
+
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link text-success"  th:href="@{/produtos/list}">Produtos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-success"  th:href="@{/vendas/list}">Vendas</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-success"  th:href="@{/itemvenda/list}">Itens Venda</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link text-success" th:href="@{/vendas/carrinho}">Carrinho</a>
+                </li>
+
+
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Pessoas
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" th:href="@{/pessoas/fisica/list}">Pessoa Fisica</a></li>
+                        <li><a class="dropdown-item" th:href="@{/pessoas/juridica/list}">Pessoa Juridica</a></li>
+                        <li><a class="dropdown-item" th:href="@{/pessoas/list}">Pessoas</a></li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+    </nav>
+</header>
+
