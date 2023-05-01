@@ -67,11 +67,20 @@
 				<input type="text" class="form-control" th:field="*{endereco.logradouro}" name="logradouro" id="logradouro">
 			</div>
 
-			<div class="form-group col-md-4">
+			<div class="form-group col-md-2">
 				<label for="cidade">Cidade</label>
 				<select id="cidade" th:field="*{endereco.cidade.id}" name="cidade" class="form-control">
 					<option th:each="cidade :${listaCidades}"
 							th:value="${cidade.id}" th:text="${cidade.nome}">
+					</option>
+				</select>
+			</div>
+
+			<div class="form-group col-md-2">
+				<label for="estado">Estado</label>
+				<select id="estado" th:field="*{endereco.cidade.estado.id}" name="cidade" class="form-control">
+					<option th:each="estado :${listaEstados}"
+							th:value="${estado.id}" th:text="${estado.nome}">
 					</option>
 				</select>
 			</div>

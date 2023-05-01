@@ -1,33 +1,12 @@
 <!doctype html>
 <html lang="pt-BR"  xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:replace="~{home::bootstrap}">
-    <link th:replace="~{home::font-awesome}">
+<head th:replace="~{fragments/head::head}">
 
-    <title>Buscando pessoas do Banco</title>
-    <style>
-
-
-        th,td{
-            text-align: center;
-            font-weight: bold;
-        }
-        button > a{
-            color: white;
-        }
-
-    </style>
-
-</head>
 <body>
-<header th:replace="~{home::header}"></header>
+<header th:replace="~{fragments/header::header}"></header>
 
 <div class="container m-5" style="border: 1px solid black">
-    <form th:action="@{/produtos/finalizar/confirmar}" method="post">
+    <form th:action="@{/vendas/finalizar/confirmar}" method="post">
         <div class="row">
             <div class="col-12">
                 <div class="table-responsive">
@@ -42,7 +21,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="i : ${itemVendaList}">
+                        <tr th:each="i : ${session.venda.getItensList()}">
                             <td th:text="${i.getProduto().getId()}"></td>
                             <td th:text="${i.getProduto().getDescricao()}">Bike</td>
                             <td>
@@ -59,7 +38,7 @@
                             <td></td>
                             <td><strong>Total</strong></td>
                             <td class="text-right">
-                                R$<strong th:text="${venda.total()}"></strong>
+                                R$<strong th:text="${session.venda.total()}"></strong>
                             </td>
                         </tr>
 
@@ -78,15 +57,6 @@
                             </select>
                         </div>
 
-<!--                        <div class="col-sm-12  col-md-6">-->
-<!--                            <label for="endereco">Endereço</label>-->
-<!--                            <select id="endereco" th:field="*{venda.pessoa.endereco}" name="pessoa" class="form-control">-->
-<!--                                <option th:each="e :${enderecos}"-->
-<!--                                        th:value="${e.id}" th:text="${e.complemento}">-->
-<!--                                </option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-
                     </div>
 
                     <div class="row">
@@ -102,6 +72,6 @@
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<footer th:replace="~{fragments/footer::footer}"></footer>
 </body>
 </html>

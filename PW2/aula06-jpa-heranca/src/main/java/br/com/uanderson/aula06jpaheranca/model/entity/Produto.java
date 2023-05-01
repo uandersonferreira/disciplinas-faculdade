@@ -22,13 +22,22 @@ public class Produto implements Serializable {
 
      */
 
-    public Produto(Long id, String descricao, Double valor) {
+    public Produto(Long id, String descricao, Double valor, List<ItemVenda> itemVenda) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
+        this.itemVenda = itemVenda;
     }
 
     public Produto() {
+    }
+
+    public List<ItemVenda> getItemVenda() {
+        return itemVenda;
+    }
+
+    public void setItemVenda(List<ItemVenda> itemVenda) {
+        this.itemVenda = itemVenda;
     }
 
     public Long getId() {

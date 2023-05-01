@@ -12,20 +12,28 @@ public class Estado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
     private String nome;
     private String sigla;
+    @OneToMany(mappedBy = "estado")
+    private List<Cidade> cidades;
 
-    public Estado(Long id, String nome, String sigla) {
+    public Estado(Long id, String nome, String sigla, List<Cidade> cidades) {
         this.id = id;
         this.nome = nome;
         this.sigla = sigla;
+        this.cidades = cidades;
     }
 
     public Estado() {
     }
 
+    public List<Cidade> getCidades() {
+        return cidades;
+    }
 
+    public void setCidades(List<Cidade> cidades) {
+        this.cidades = cidades;
+    }
 
     public Long getId() {
         return id;
