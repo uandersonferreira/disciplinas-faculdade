@@ -45,15 +45,14 @@ public class VendaController {
 
    }
 
+    @RequestMapping("/")
+    public String home(){
+        return "home";
+    }
     @GetMapping("/list")
     public String listarVendas(ModelMap modelMap){
         modelMap.addAttribute("listVendas", vendaRepository.listAll());
         return "venda/list";//page html
-    }
-
-    @RequestMapping("/")
-    public String home(){
-        return "home";
     }
 
     @GetMapping("/carrinho")
@@ -155,6 +154,15 @@ public class VendaController {
         return "redirect:/vendas/carrinho";
     }
 
+    @GetMapping("/visualizar/{id}")
+    public String visualizarVenda(@PathVariable Long id, ModelMap modelMap){
+        Venda venda = vendaRepository.findById(id);
+        List<ItemVenda> itensList = venda.getItensList();
+
+        modelMap.addAttribute("venda", venda);
+        modelMap.addAttribute("itens", itensList);
+        return "venda/visualizarVenda";//page html
+    }
 
 
 }//class

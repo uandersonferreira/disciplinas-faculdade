@@ -1,6 +1,6 @@
 package br.com.uanderson.aula06jpaheranca.model.repository;
 
-import br.com.uanderson.aula06jpaheranca.model.entity.Produto;
+import br.com.uanderson.aula06jpaheranca.model.entity.Venda;
 import br.com.uanderson.aula06jpaheranca.model.entity.Venda;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -25,6 +25,20 @@ public class VendaRepository {
         /*
         method que irá listar todas as vendas cadastradas na base de dados.
          */
+    }
+
+    public Venda findById(Long id){
+        Venda venda = entityManager.find(Venda.class, id);
+        return venda;
+    }
+
+    public void removeById(Long id){
+        Venda venda = entityManager.find(Venda.class, id);
+        entityManager.remove(venda);
+    }
+
+    public void update(Venda venda){
+        entityManager.merge(venda);
     }
 
 

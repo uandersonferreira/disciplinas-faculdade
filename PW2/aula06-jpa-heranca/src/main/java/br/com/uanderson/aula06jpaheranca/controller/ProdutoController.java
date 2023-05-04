@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @Transactional
 @RequestMapping("produtos")
@@ -23,7 +25,11 @@ public class ProdutoController {
 
     @GetMapping("/list")
     public String listarProdutos(ModelMap modelMap){
-        modelMap.addAttribute("produtos", produtoRepository.listAll());
+        List<Produto> produtos = produtoRepository.listAll();
+        if (produtos.isEmpty()){
+            modelMap.addAttribute("mensagemErro", "Ops! não há produtos cadastrados no momento!!");
+        }
+        modelMap.addAttribute("produtos", produtos);
         return "/produto/list";//page html
     }
 
