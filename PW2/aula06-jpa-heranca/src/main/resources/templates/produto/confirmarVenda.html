@@ -21,7 +21,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="i : ${venda.getItensList()}">
+                        <tr th:each="i : ${session.venda.getItensList()}">
                             <td th:text="${i.getProduto().getId()}"></td>
                             <td th:text="${i.getProduto().getDescricao()}">Bike</td>
                             <td>
@@ -55,16 +55,6 @@
                                 </option>
                             </select>
                         </div>
-
-                        <div class="col-sm-12  col-md-6">
-                            <label for="endereco">Endereço</label>
-                            <select id="endereco" th:field="*{enderecos}" name="pessoa" class="form-control">
-                                <option th:each="e :${enderecos}"
-                                        th:value="${e.id}" th:text="${e.cidade}">
-                                </option>
-                            </select>
-                        </div>
-
                     </div>
 
                     <div class="row">

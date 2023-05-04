@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-//@Scope("request")
+@Scope("request")
 @Controller
 @Transactional
 @RequestMapping("vendas")
@@ -32,9 +32,8 @@ public class VendaController {
     private final ProdutoRepository produtoRepository;
     private final PessoaRepository pessoaRepository;
     private final ItemVendaRepository itemVendaRepository;
-
-    private List<ItemVenda> itemVendaList = new ArrayList<>();
     private Venda venda;
+
    @Autowired
     public VendaController(VendaRepository vendaRepository, ProdutoRepository produtoRepository, PessoaRepository pessoaRepository, ItemVendaRepository itemVendaRepository, Venda venda) {
         this.vendaRepository = vendaRepository;
@@ -56,11 +55,9 @@ public class VendaController {
     }
 
     @GetMapping("/carrinho")
-    public ModelAndView chamarCarrinho(HttpSession session){
+    public ModelAndView chamarCarrinho(){
         ModelAndView modelAndView = new ModelAndView("produto/carrinho");
-        venda.setItensList(itemVendaList);//associando a lista de itens a venda
-
-        session.setAttribute("venda", venda);
+//        venda.setItensList(itemVendaList);//associando a lista de itens a venda
         System.out.println("VENDA SESSION: "+venda.getItensList().size());
         return modelAndView;
     }
@@ -68,11 +65,8 @@ public class VendaController {
     @GetMapping("/finalizar")
     public ModelAndView finalizarCompra(){
         ModelAndView modelAndView = new ModelAndView("produto/finalizar");
-        venda.setItensList(itemVendaList);
         List<Pessoa> pessoas = pessoaRepository.listAll();
-
         modelAndView.addObject("pessoaList", pessoas);
-        modelAndView.addObject("venda", venda);
         return modelAndView;
     }
 
@@ -87,14 +81,7 @@ public class VendaController {
         venda.setTotalVenda(venda.total());
         vendaRepository.save(venda);
 
-        List<ItemVenda> itensList = venda.getItensList();
-        for (ItemVenda itemVenda : itensList) {
-            itemVenda.setVenda(venda);
-            itemVendaRepository.save(itemVenda);
-        }
-
-        itemVendaList = new ArrayList<>();//PARA LIMPAR O CARRINHO APÓS REALZIAR A VENDA
-
+        venda.getItensList().clear();//PARA LIMPAR O CARRINHO APÓS REALZIAR A VENDA
         return new ModelAndView("redirect:/vendas/list");
     }
 
@@ -102,7 +89,7 @@ public class VendaController {
     @GetMapping("/alterarQuantidade/{id}/{acao}")
     public String alterarQuantidade(@PathVariable Long id, @PathVariable Integer acao){
         //SE 1 = ADICIONAR / 0 - DIMINUIR
-        for (ItemVenda item : itemVendaList) {
+        for (ItemVenda item : venda.getItensList()) {
             if (item.getProduto().getId().equals(id)){
                 if (acao.equals(1)){
                     item.setQtd(item.getQtd() + 1);
@@ -119,9 +106,9 @@ public class VendaController {
     }
     @GetMapping("/removerProduto/{id}")
     public String removerProduto(@PathVariable Long id){
-        for (ItemVenda item : itemVendaList) {
+        for (ItemVenda item : venda.getItensList()) {
             if (item.getProduto().getId().equals(id)){
-                itemVendaList.remove(item);
+                venda.getItensList().remove(item);
                 break;
             }
         }//foreach
@@ -131,9 +118,10 @@ public class VendaController {
     @GetMapping("adicionar/produto/{id}")
     public String addCarrinho(@PathVariable Long id){
         Produto produto = produtoRepository.findById(id);
+
         int controle = 0;
-        if (itemVendaList != null){
-            for (ItemVenda item : itemVendaList) {
+        if (venda.getItensList() != null){
+            for (ItemVenda item : venda.getItensList()) {
                 if (item.getProduto().getId().equals(produto.getId())){
                     item.setQtd(item.getQtd() + 1);
                     controle = 1;
@@ -148,8 +136,10 @@ public class VendaController {
             item.setProduto(produto);
             item.setQtd(item.getQtd() + 1);//0 +1
             System.out.println("ITEM: "+item.getProduto().getDescricao());
-            itemVendaList.add(item);//está sobreescrevendo os itens adciconandos no carrinho
-            System.out.println("TAMANHO: "+itemVendaList.size());
+            item.setVenda(venda);
+            venda.getItensList().add(item);//está sobreescrevendo os itens adciconandos no carrinho
+
+            System.out.println("TAMANHO: "+venda.getItensList().size());
         }
         return "redirect:/vendas/carrinho";
     }

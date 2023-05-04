@@ -6,11 +6,12 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 
-//@Scope("session")
+@Scope("session")
 @Entity
 @Component
 public class Venda implements Serializable {
@@ -20,9 +21,8 @@ public class Venda implements Serializable {
 
     private LocalDate localDate;
     private Double totalVenda;
-    @OneToMany()//Uma venda para muitos itensVendas. mappedBy = "venda", cascade = CascadeType.PERSIST
-    @JoinColumn(name = "id_itemVenda")
-    private List<ItemVenda> itensList;
+    @OneToMany(mappedBy = "venda",cascade = CascadeType.PERSIST)//Uma venda para muitos itensVendas. mappedBy = "venda", cascade = CascadeType.PERSIST
+    private List<ItemVenda> itensList = new ArrayList<>();
 
     //UMA PESSOA PODE TER VÁRIAS VENDAS
     //MUITAS VENDAS PERTENCEM A UMA PESSOA

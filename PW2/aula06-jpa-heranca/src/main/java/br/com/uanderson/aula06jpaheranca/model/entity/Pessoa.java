@@ -23,27 +23,32 @@ public  class Pessoa implements Serializable {
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     private List<Venda> vendaList;
     //UMA VENDA PERTENCE APENAS A UMA PESSOA
-    @OneToOne(cascade = CascadeType.ALL)
-    private Endereco endereco;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Endereco> enderecos;//UMA PESSOA TÊM MAIS DE UM ENDEREÇO  1 - N
+    /*
+     * ADD UM NOVO ENDEREÇO AO CLIENTE PARA ENTREGA
+     * -
+     * -
+     */
 
-    public Pessoa(Long id, String nome, String email, String telefone, List<Venda> vendaList, Endereco endereco) {
+    public Pessoa(Long id, String nome, String email, String telefone, List<Venda> vendaList, List<Endereco> enderecos) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.vendaList = vendaList;
-        this.endereco = endereco;
+        this.enderecos = enderecos;
     }
 
     public Pessoa() {
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 
     public Long getId() {
@@ -95,6 +100,7 @@ public  class Pessoa implements Serializable {
                 ", email='" + email + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", vendaList=" + vendaList +
+                ", enderecos=" + enderecos +
                 '}';
     }
 }//class
