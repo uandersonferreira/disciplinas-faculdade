@@ -6,21 +6,15 @@
 <header th:replace="~{fragments/header::header}"></header>
 
 <div class="container">
-	<h1 style="display:flex;">
-		Salvar &nbsp;
-		<span id="titulo_pessoa_fisica" style="display: none;">Pessoa Física</span>
-		<span id="titulo_pessoa_juridica" style="display: none;">Pessoa Juridica</span>
-	</h1>
-
+	<h1>Salvar Pessoa Juridica</h1>
 	<form th:action="${pessoaJuridica.id == null} ? @{/pessoas/juridica/save} : @{/pessoas/juridica/update} "
 		  th:object="${pessoaJuridica}" method="post" >
 
-		<div class="form-group">
-			<label for="id">Id</label>
-			<input class="form-control" type="number" id="id" th:field="*{id}" readonly="readonly" placeholder="Id Gerado Automático">
-		</div>
-
 		<div class="form-row">
+			<div class="form-group col-md-12">
+				<input class="form-control" type="number" id="id" th:field="*{id}" readonly="readonly" placeholder="Id Gerado Automático">
+			</div>
+
 			<div class="form-group col-md-6">
 				<label for="nome">Nome</label>
 				<input type="text" name="nome" id="nome" th:field="*{nome}" class="form-control" placeholder="Nome completo">
@@ -72,61 +66,25 @@
 
 		<!--SELEÇÃO PESSOA -->
 		<div class="form-row">
-			<div class="form-group col-md-6">
-				<input type="radio" name="tipoPessoa" id="tipo_pessoa-fisica"  value="1" onchange="formPessoaFisica();">Pessoa Física
-			</div>
-
-			<div class="form-group col-md-6">
-				<input type="radio" name="tipoPessoa" id="tipo_pessoa-juridica" value="2" onchange="formPessoaJuridica();">Pessoa
-				Jurídica
-			</div>
-
-			<div class="form-group col-md-12" id="form-pessoaJuridica-fisica" style="display: none;">
-				<label for="cpf">CPF</label>
-				<input type="text" name="cpf" id="cpf"  class="form-group col-md-4" placeholder="cpf">
-			</div>
-
-			<div class="form-group col-md-12" id="form-pessoaJuridica-juridica"  style="display: none;">
+			<div class="form-group col-md-6" >
 				<label for="razaoSocial">Razão social</label>
-				<input type="text" name="razaoSocial" id="razaoSocial" th:field="*{razaoSocial}" class="form-group col-md-4" placeholder="Razão Social">
+				<input type="text" name="razaoSocial" id="razaoSocial" th:field="*{razaoSocial}" class="form-control" placeholder="Razão Social">
 
+			</div>
+			<div class="form-group col-md-6"  >
 				<label for="cnpj">CNPJ</label>
-				<input type="text" name="cnpj" id="cnpj" th:field="*{cnpj}" class="form-group col-md-4" placeholder="cnpj">
+				<input type="text" maxlength="14" name="cnpj" id="cnpj" th:field="*{cnpj}" class="form-control" placeholder="00.000.000/0000-00">
 			</div>
 
 		</div><!--form-row-->
 
 		<!--BOTÃO SUBMIT-->
-		<div id="form-btn-cadastrar" style="display: none;">
-			<input type="submit" name="enviar" value="salvar"><br><br>
+		<div class="form-group col-md-12" id="form-btn-cadastrar">
+			<button type="submit" name="enviar" value="salvar" class="btn btn-primary form-control">Salvar</button>
 		</div>
 
 	</form>
 </div>
-
-	<script>
-		function formPessoaFisica(){
-			document.getElementById("titulo_pessoa_fisica").style.display = 'block';
-			document.getElementById("titulo_pessoa_juridica").style.display = 'none';
-
-			document.getElementById("form-pessoaJuridica-fisica").style.display = 'block';
-			document.getElementById("form-pessoaJuridica-juridica").style.display = 'none';
-
-			document.getElementById("form-btn-cadastrar").style.display = 'block';
-
-		}
-
-		function formPessoaJuridica(){
-			document.getElementById("titulo_pessoa_fisica").style.display = 'none';
-			document.getElementById("titulo_pessoa_juridica").style.display = 'block';
-
-			document.getElementById("form-pessoaJuridica-fisica").style.display = 'none';
-			document.getElementById("form-pessoaJuridica-juridica").style.display = 'block';
-
-			document.getElementById("form-btn-cadastrar").style.display = 'block';
-
-		}
-	</script>
 
 <footer th:replace="~{fragments/footer::footer}"></footer>
 </div>

@@ -20,11 +20,11 @@ public  class Pessoa implements Serializable {
 
     private String email;
     private String telefone;
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     private List<Venda> vendaList;
     //UMA VENDA PERTENCE APENAS A UMA PESSOA
     @OneToOne(cascade = CascadeType.ALL)
-    private Endereco endereco;
+    private Endereco endereco;//UMA PESSOA TÊM MAIS DE UM ENDEREÇO  1 - N
 
     public Pessoa(Long id, String nome, String email, String telefone, List<Venda> vendaList, Endereco endereco) {
         this.id = id;
@@ -37,6 +37,7 @@ public  class Pessoa implements Serializable {
 
     public Pessoa() {
     }
+
 
     public Endereco getEndereco() {
         return endereco;
@@ -95,6 +96,7 @@ public  class Pessoa implements Serializable {
                 ", email='" + email + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", vendaList=" + vendaList +
+                ", endereco=" + endereco +
                 '}';
     }
 }//class
