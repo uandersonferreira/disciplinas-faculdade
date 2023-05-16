@@ -3,10 +3,12 @@ package br.com.uanderson.aula06jpaheranca.controller;
 import br.com.uanderson.aula06jpaheranca.model.entity.Estado;
 import br.com.uanderson.aula06jpaheranca.model.entity.PessoaFisica;
 import br.com.uanderson.aula06jpaheranca.model.repository.*;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,7 +58,9 @@ public class PessoaFisicaController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(PessoaFisica pessoaFisica){
+    public ModelAndView save(@Valid PessoaFisica pessoaFisica, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) return form(pessoaFisica);
+
         Estado estado = pessoaFisica.getEndereco().getCidade().getEstado();
         pessoaFisica.getEndereco().getCidade().setEstado(estado);
         enderecoRepository.save(pessoaFisica.getEndereco());
@@ -81,7 +85,9 @@ public class PessoaFisicaController {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(PessoaFisica pessoaFisica) {
+    public ModelAndView update(@Valid PessoaFisica pessoaFisica, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return form(pessoaFisica);
+
         pessoaRepository.update(pessoaFisica);
         return new ModelAndView("redirect:/pessoas/fisica/list");
     }

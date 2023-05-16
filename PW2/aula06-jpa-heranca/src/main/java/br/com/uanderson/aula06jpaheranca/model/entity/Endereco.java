@@ -1,6 +1,8 @@
 package br.com.uanderson.aula06jpaheranca.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,12 +14,17 @@ public class Endereco implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NotBlank(message = "Preencha o campo CEP")
     private String cep;
+    @NotBlank(message = "Preencha o campo Logradouro")
     private String logradouro;
+    @NotBlank(message = "Preencha o campo Complemento")
     private String complemento;
+    @NotBlank(message = "Preencha o campo Bairro")
     private String bairro;
     @ManyToOne
     @JoinColumn(name = "cidade_id")
+    @NotNull(message = "Informe uma Cidade")
     private Cidade cidade;
 
 

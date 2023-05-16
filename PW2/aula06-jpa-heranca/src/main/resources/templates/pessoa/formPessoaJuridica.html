@@ -14,15 +14,16 @@
 			<div class="form-group col-md-12">
 				<input class="form-control" type="number" id="id" th:field="*{id}" readonly="readonly" placeholder="Id Gerado Automático">
 			</div>
-
 			<div class="form-group col-md-6">
 				<label for="nome">Nome</label>
-				<input type="text" name="nome" id="nome" th:field="*{nome}" class="form-control" placeholder="Nome completo">
+				<input type="text" name="nome" th:errorclass="is-invalid" id="nome" th:field="*{nome}" class="form-control" placeholder="Nome completo">
+				<div class="invalid-feedback" th:errors="*{nome}"></div>
 			</div>
 
 			<div class="form-group col-md-6">
 				<label for="email">Email</label>
-				<input type="text" name="email" id="email" th:field="*{email}" class="form-control" placeholder="E-mail">
+				<input type="text" name="email" th:errorclass="is-invalid" id="email" th:field="*{email}" class="form-control" placeholder="E-mail">
+				<div class="invalid-feedback" th:errors="*{email}"></div>
 			</div>
 		</div>
 
@@ -30,26 +31,30 @@
 		<div class="form-row">
 			<div class="form-group col-md-5">
 				<label for="complemento">Complemento</label>
-				<input type="text" class="form-control" th:field="*{endereco.complemento}" name="complemento" id="complemento" placeholder="ex: Rua dos Bobos, nº 0">
+				<input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{endereco.complemento}" name="complemento" id="complemento" placeholder="ex: Rua dos Bobos, nº 0">
+				<div class="invalid-feedback" th:errors="*{endereco.complemento}"></div>
 			</div>
 			<div class="form-group col-md-3">
 				<label for="bairro">Bairro</label>
-				<input type="text" class="form-control" th:field="*{endereco.bairro}" name="bairro" id="bairro" placeholder="ex: São João da Vila">
+				<input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{endereco.bairro}" name="bairro" id="bairro" placeholder="ex: São João da Vila">
+				<div class="invalid-feedback" th:errors="*{endereco.bairro}"></div>
 			</div>
 
 			<div class="form-group col-md-4">
 				<label for="telefone">Telefone</label>
-				<input type="text" name="telefone" id="telefone" th:field="*{telefone}" class="form-control" placeholder="Telefone">
+				<input type="text" name="telefone" th:errorclass="is-invalid" id="telefone" th:field="*{telefone}" class="form-control" placeholder="Telefone">
+				<div class="invalid-feedback" th:errors="*{telefone}"></div>
 			</div>
 		</div>
 
 		<div class="form-row">
-			<div class="form-group col-md-4">
+			<div class="form-group col-md-6">
 				<label for="logradouro">Logradouro</label>
-				<input type="text" class="form-control" th:field="*{endereco.logradouro}" name="logradouro" id="logradouro">
+				<input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{endereco.logradouro}" name="logradouro" id="logradouro">
+				<div class="invalid-feedback" th:errors="*{endereco.logradouro}"></div>
 			</div>
 
-			<div class="form-group col-md-4">
+			<div class="form-group col-md-3">
 				<label for="cidade">Cidade</label>
 				<select id="cidade" th:field="*{endereco.cidade.id}" name="cidade" class="form-control">
 					<option th:each="cidade :${listaCidades}"
@@ -58,9 +63,10 @@
 				</select>
 			</div>
 
-			<div class="form-group col-md-4">
+			<div class="form-group col-md-3">
 				<label for="cep">CEP</label>
-				<input type="text" class="form-control" th:field="*{endereco.cep}" name="cep" id="cep">
+				<input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{endereco.cep}" name="cep" id="cep">
+				<div class="invalid-feedback" th:errors="*{endereco.cep}"></div>
 			</div>
 		</div>
 
@@ -68,12 +74,14 @@
 		<div class="form-row">
 			<div class="form-group col-md-6" >
 				<label for="razaoSocial">Razão social</label>
-				<input type="text" name="razaoSocial" id="razaoSocial" th:field="*{razaoSocial}" class="form-control" placeholder="Razão Social">
-
+				<input type="text" name="razaoSocial" th:errorclass="is-invalid" id="razaoSocial" th:field="*{razaoSocial}" class="form-control" placeholder="Razão Social">
+				<div class="invalid-feedback" th:errors="*{razaoSocial}"></div>
 			</div>
+
 			<div class="form-group col-md-6"  >
 				<label for="cnpj">CNPJ</label>
-				<input type="text" maxlength="14" name="cnpj" id="cnpj" th:field="*{cnpj}" class="form-control" placeholder="00.000.000/0000-00">
+				<input type="text" th:errorclass="is-invalid" name="cnpj" id="cnpj" th:field="*{cnpj}" class="form-control" placeholder="00.000.000/0000-00">
+				<div class="invalid-feedback" th:errors="*{cnpj}"></div>
 			</div>
 
 		</div><!--form-row-->

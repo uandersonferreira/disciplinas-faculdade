@@ -1,11 +1,19 @@
 package br.com.uanderson.aula06jpaheranca.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CNPJ;
+
 import java.util.List;
 
 @Entity
 public class PessoaJuridica extends Pessoa {
+    @NotBlank(message = "Preencha o campo Razão Social")
     private String razaoSocial;
+    @NotBlank(message = "Preencha o campo CNPJ")
+//    @CNPJ(message = "Informe um CNPJ válido. ex: 00.000.000/0000-00")
     private String cnpj;
 
     public PessoaJuridica(Long id, String nome, String email, String telefone, List<Venda> vendaList, Endereco endereco, String razaoSocial, String cnpj) {

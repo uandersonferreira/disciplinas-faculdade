@@ -1,12 +1,20 @@
 package br.com.uanderson.aula06jpaheranca.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.xml.crypto.Data;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 
@@ -17,17 +25,22 @@ public class Venda implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private LocalDate localDate;
+    @FutureOrPresent(message = "Informe uma data atual ou data futura!")
+    @NotNull(message = "Preencha o campo Data")
+    private LocalDate localDate = LocalDate.now();
+    @Min(value = 0, message = "Total venda não pode ser menor que 0")
+    @NotNull(message = "Total venda não pode ser nulo")
     private Double totalVenda;
     @OneToMany()//Uma venda para muitos itensVendas. mappedBy = "venda", cascade = CascadeType.PERSIST
     @JoinColumn(name = "id_itemVenda")
+    @Valid
     private List<ItemVenda> itensList;
 
     //UMA PESSOA PODE TER VÁRIAS VENDAS
     //MUITAS VENDAS PERTENCEM A UMA PESSOA
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_pessoa")
+    @Valid
     private Pessoa pessoa;
 
     public Venda(Long id, LocalDate localDate, Double totalVenda, List<ItemVenda> itensList, Pessoa pessoa) {

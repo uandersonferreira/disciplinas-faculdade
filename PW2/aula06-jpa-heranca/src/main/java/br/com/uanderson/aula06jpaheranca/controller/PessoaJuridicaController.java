@@ -3,10 +3,12 @@ package br.com.uanderson.aula06jpaheranca.controller;
 import br.com.uanderson.aula06jpaheranca.model.entity.PessoaJuridica;
 import br.com.uanderson.aula06jpaheranca.model.entity.PessoaJuridica;
 import br.com.uanderson.aula06jpaheranca.model.repository.*;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,7 +55,9 @@ public class PessoaJuridicaController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(PessoaJuridica pessoaJuridica){
+    public ModelAndView save(@Valid PessoaJuridica pessoaJuridica, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) return form(pessoaJuridica);
+
         enderecoRepository.save(pessoaJuridica.getEndereco());
         pessoaJuridicaRepository.save(pessoaJuridica);
         return new ModelAndView("redirect:/pessoas/juridica/list");
@@ -76,7 +80,9 @@ public class PessoaJuridicaController {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(PessoaJuridica pessoaJuridica) {
+    public ModelAndView update(@Valid PessoaJuridica pessoaJuridica, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return form(pessoaJuridica);
+
         pessoaRepository.update(pessoaJuridica);
         return new ModelAndView("redirect:/pessoas/juridica/list");
     }

@@ -81,7 +81,6 @@ public class VendaController {
     public ModelAndView confirmarCompra(Long pessoa){
 //        Pessoa pessoa = pessoaRepository.listAll().get(0);//SOMENTE PARA TESTE ESTOU SEMPRE ATRIBUINDO A VENDA A 1° PESSOA DO BANCO QUE É RETORNADA.
         Pessoa pessoaEncontrada = pessoaRepository.findById(pessoa);
-        System.out.println("VENDA SESSION TOTAL: "+venda.total());
         venda.setId(null);
         venda.setLocalDate(LocalDate.now());
         venda.setPessoa(pessoaEncontrada);

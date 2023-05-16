@@ -2,9 +2,11 @@ package br.com.uanderson.aula06jpaheranca.controller;
 
 import br.com.uanderson.aula06jpaheranca.model.entity.*;
 import br.com.uanderson.aula06jpaheranca.model.repository.*;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,8 +30,8 @@ public class ProdutoController {
     }
 
     @GetMapping("/form")
-    public String form(Produto produto){
-        return "/produto/form";
+    public ModelAndView form(Produto produto){
+        return new ModelAndView("/produto/form");
     }
 
     @RequestMapping("/")
@@ -38,9 +40,13 @@ public class ProdutoController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(Produto produto){
+    public ModelAndView save(@Valid Produto produto, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return form(produto);
+        }
+
         produtoRepository.save(produto);
-        return new ModelAndView("redirect:/produtos/list");
+        return new ModelAndView( "redirect:/produtos/list");
         /*
         Ao realizar o submit do formPessoaJuridica.html irá se chamado o metodo save por de baixo dos panos
         para pode salvar e quando aciona o /save realiza-se um redirecionamento automático para
@@ -63,7 +69,10 @@ public class ProdutoController {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(Produto produto) {
+    public ModelAndView update(Produto produto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return form(produto);
+        }
         produtoRepository.update(produto);
         return new ModelAndView("redirect:/produtos/list");
     }

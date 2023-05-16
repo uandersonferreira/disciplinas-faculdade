@@ -1,6 +1,8 @@
 package br.com.uanderson.aula06jpaheranca.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,10 +12,15 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Informe uma descrição para o produto!")
     private String descricao;
+    @DecimalMin(value = "0.01", message = "Valor não permitido. Informe um valor maior que 0" )
+    @NotNull(message = "Valor não permitido. Informe um valor maior que 0 para o produto!")
     private Double valor;
 
-    @OneToMany(mappedBy = "produto")
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    @Null//Deixar null, pois o produto pode não ter sido vendido
     private List<ItemVenda> itemVenda;
     /*
     @OneToMany -> Um produto para vários itemVenda

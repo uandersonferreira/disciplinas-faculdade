@@ -1,6 +1,8 @@
 package br.com.uanderson.aula06jpaheranca.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import org.springframework.context.annotation.Scope;
 
 import java.io.Serializable;
@@ -16,14 +18,19 @@ public  class Pessoa implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NotBlank(message = "Preencha o campo nome")
+    @Size(min = 3, message = "O nome dever conter 3 ou mais caracteres")
     private String nome;
-
+    @NotBlank(message = "Preencha o campo Email")
+    @Email(message = "Informe um email válido. ex: seunome@exemplo.com")//Verifica somente o formato, e não se é um e-mail real válido!
     private String email;
+    @NotBlank(message = "Preencha o campo Telefone ")
     private String telefone;
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
+    @Null//Pois a pessoa pode não ter nenhuma venda
     private List<Venda> vendaList;
-    //UMA VENDA PERTENCE APENAS A UMA PESSOA
     @OneToOne(cascade = CascadeType.ALL)
+    @Valid
     private Endereco endereco;//UMA PESSOA TÊM MAIS DE UM ENDEREÇO  1 - N
 
     public Pessoa(Long id, String nome, String email, String telefone, List<Venda> vendaList, Endereco endereco) {
