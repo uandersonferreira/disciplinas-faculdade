@@ -44,6 +44,10 @@ public class PessoaController {
         return "home";
     }
 
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
     @GetMapping("/list")
     public String listarPessoasFisicas(ModelMap modelMap){
         List<Pessoa> pessoas = pessoaRepository.listAll();
