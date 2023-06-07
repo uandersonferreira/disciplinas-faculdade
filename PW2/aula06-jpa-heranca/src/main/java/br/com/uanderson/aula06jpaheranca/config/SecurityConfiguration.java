@@ -14,6 +14,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfiguration {
+    private final UsuarioDetailsConfig usuarioDetailsConfig;
+
+    public SecurityConfiguration(UsuarioDetailsConfig usuarioDetailsConfig) {
+        this.usuarioDetailsConfig = usuarioDetailsConfig;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -43,8 +48,9 @@ public class SecurityConfiguration {
     }
 
     @Autowired
-    public void configureUserDetails(AuthenticationManagerBuilder builder)
-            throws Exception {
+    public void configureUserDetails(AuthenticationManagerBuilder builder) throws Exception {
+        builder.userDetailsService(usuarioDetailsConfig).passwordEncoder(new BCryptPasswordEncoder());
+
         builder.inMemoryAuthentication() //configuração de autenticação em memória
                 .withUser("admin").password(new BCryptPasswordEncoder().encode("123")).roles("ADMIN");
     }

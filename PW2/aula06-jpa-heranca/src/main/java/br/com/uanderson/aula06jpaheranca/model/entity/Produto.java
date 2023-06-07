@@ -18,6 +18,7 @@ public class Produto implements Serializable {
     @DecimalMin(value = "0.01", message = "Valor não permitido. Informe um valor maior que 0" )
     @NotNull(message = "Valor não permitido. Informe um valor maior que 0 para o produto!")
     private Double valor;
+    private String nomeImagem;
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     @Null//Deixar null, pois o produto pode não ter sido vendido
@@ -29,14 +30,23 @@ public class Produto implements Serializable {
 
      */
 
-    public Produto(Long id, String descricao, Double valor, List<ItemVenda> itemVenda) {
+    public Produto(Long id, String descricao, @NotNull(message = "Valor não permitido. Informe um valor maior que 0 para o produto!") Double valor, String nomeImagem, List<ItemVenda> itemVenda) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
+        this.nomeImagem = nomeImagem;
         this.itemVenda = itemVenda;
     }
 
     public Produto() {
+    }
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 
     public List<ItemVenda> getItemVenda() {

@@ -8,6 +8,7 @@
 <div class="container">
 <h1>FORM</h1>
 <form th:action="${produto.id == null} ? @{/produtos/save} : @{/produtos/update} "
+      enctype='multipart/form-data'
       th:object="${produto}" method="post">
 
     <div class="form-group">
@@ -24,6 +25,11 @@
         <label for="valor">Valor</label>
         <input class="form-control" th:errorclass="is-invalid" type="number"  step="0.01" min=0.00 id="valor" th:field="*{valor}"  placeholder="Preço">
         <div class="invalid-feedback" th:errors="*{valor}"></div>
+    </div>
+    <div class="form-group">
+        <label for="valor">Imagem</label>
+        <input class="form-control" th:errorclass="is-invalid" type="file" th:field="*{nomeImagem}" name="file">
+        <div class="invalid-feedback" th:errors="*{nomeImagem}"></div>
     </div>
 
     <div class="col-auto">

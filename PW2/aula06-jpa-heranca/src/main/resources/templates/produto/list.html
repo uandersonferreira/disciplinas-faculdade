@@ -5,29 +5,37 @@
 <header th:replace="~{fragments/header::header}"></header>
 <div class="container">
     <h1>Produtos Cadastrados</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Descrição</th>
-            <th>Valor</th>
-            <th colspan="3">Ações</th>
-        </tr>
-        </thead>
-        <tbody><!-- -->
-        <tr th:each="p : ${produtos}"><!-- foreach -->
-            <td th:text="${p.getId()}"></td> <!-- atributo id-->
-            <td th:text="${p.getDescricao()}"></td><!-- atributo name-->
-            <td th:text="${p.valor}"></td><!-- atributo name-->
-            <td><a style="color: green" th:href="@{/vendas/adicionar/produto/{id}(id=${p.id})}"><i class="fa-solid fa-cart-plus"></i></a></td>
-            <td><a th:href="@{/produtos/edit/{id}(id=${p.id})}"><i class="fa-solid fa-pen-to-square "></i></a></td>
-            <td>
-                <a style="color: red" onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produtos/remove/{id}(id=${p.id})}"><i class="fa-solid fa-trash"></i></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<!--    <table class="table">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>ID</th>-->
+<!--            <th>Descrição</th>-->
+<!--            <th>Valor</th>-->
+<!--            <th colspan="3">Ações</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>&lt;!&ndash; &ndash;&gt;-->
+<!--        <tr th:each="p : ${produtos}">&lt;!&ndash; foreach &ndash;&gt;-->
+<!--            <td th:text="${p.getId()}"></td> &lt;!&ndash; atributo id&ndash;&gt;-->
+<!--            <td th:text="${p.getDescricao()}"></td>&lt;!&ndash; atributo name&ndash;&gt;-->
+<!--            <td th:text="${p.valor}"></td>&lt;!&ndash; atributo name&ndash;&gt;-->
+<!--            <td><a style="color: green" th:href="@{/vendas/adicionar/produto/{id}(id=${p.id})}"><i class="fa-solid fa-cart-plus"></i></a></td>-->
+<!--            <td><a th:href="@{/produtos/edit/{id}(id=${p.id})}"><i class="fa-solid fa-pen-to-square "></i></a></td>-->
+<!--            <td>-->
+<!--                <a style="color: red" onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produtos/remove/{id}(id=${p.id})}"><i class="fa-solid fa-trash"></i></a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
 
+    <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
 
     <button class="btn btn-success" role="button"><a th:href="@{/produtos/form}">Novo Produto</a></button> <!--pessoas/edit/1 - CONTROLLER -->
     <button class="btn btn-primary" role="button"><a th:href="@{/}">Voltar</a></button>
