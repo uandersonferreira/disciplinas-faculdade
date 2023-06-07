@@ -1,13 +1,13 @@
 package br.com.uanderson.aula06jpaheranca.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Usuario implements Serializable, UserDetails {
@@ -16,11 +16,19 @@ public class Usuario implements Serializable, UserDetails {
     private String Login;
     @NotBlank(message = "Preencha o campo senha")
     private  String senha;
+    @ManyToMany
+    @JoinTable(
+            name = "tb_usuarios_roles",
+            joinColumns = @JoinColumn(name = "login_fk"),
+            inverseJoinColumns = @JoinColumn(name = "role_fk")
+    )
+    private List<Role> roles;
 
 
-    public Usuario(String login, String senha) {
+    public Usuario(String login, String senha, List<Role> roles) {
         Login = login;
         this.senha = senha;
+        this.roles = roles;
     }
 
     public Usuario() {
@@ -28,7 +36,7 @@ public class Usuario implements Serializable, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.roles;
     }
 
     @Override
@@ -77,11 +85,13 @@ public class Usuario implements Serializable, UserDetails {
         this.senha = senha;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "Login='" + Login + '\'' +
-                ", senha='" + senha + '\'' +
-                '}';
+    public List<Role> getRoles() {
+        return roles;
     }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+
 }//class
