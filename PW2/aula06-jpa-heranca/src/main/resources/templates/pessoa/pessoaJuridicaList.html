@@ -35,12 +35,17 @@
         </tr>
         </tbody>
     </table>
-    <button type="button" class="btn btn-primary">
-        <a th:href="@{/}">Voltar</a>
-    </button>
-    <button type="button" class="btn btn-primary">
-        <a th:href="@{/pessoas/juridica/form}">Novo</a>
-    </button>
+
+    <div class="col mb-2">
+        <div class="row">
+            <div class="col-sm-12  col-md-6">
+                <button class="btn btn-lg btn-block btn-primary" role="button"><a th:href="@{/}">Voltar</a></button>
+            </div>
+            <div class="col-sm-12 col-md-6 text-right">
+                <button class="btn btn-lg btn-block btn-success" role="button"><a th:href="@{/pessoas/juridica/form}">Novo</a></button>
+            </div>
+        </div>
+    </div>
 
 </div>
 

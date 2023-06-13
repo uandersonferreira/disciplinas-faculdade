@@ -2,6 +2,7 @@ package br.com.uanderson.aula06jpaheranca.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.engine.internal.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,26 +13,42 @@ import java.util.List;
 @Entity
 public class Usuario implements Serializable, UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @NotBlank(message = "Preencha o campo usuário")
-    private String Login;
+    @Column(unique = true)
+    private String login;
     @NotBlank(message = "Preencha o campo senha")
     private  String senha;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "tb_usuarios_roles",
-            joinColumns = @JoinColumn(name = "login_fk"),
+            joinColumns = @JoinColumn(name = "usuario_login_fk"),
             inverseJoinColumns = @JoinColumn(name = "role_fk")
     )
     private List<Role> roles;
 
+    public Usuario(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
+    }
 
     public Usuario(String login, String senha, List<Role> roles) {
-        Login = login;
+        this.login = login;
         this.senha = senha;
         this.roles = roles;
     }
 
     public Usuario() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -46,8 +63,9 @@ public class Usuario implements Serializable, UserDetails {
 
     @Override
     public String getUsername() {
-        return this.Login;
+        return null;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -70,11 +88,11 @@ public class Usuario implements Serializable, UserDetails {
     }
 
     public String getLogin() {
-        return Login;
+        return login;
     }
 
     public void setLogin(String login) {
-        Login = login;
+        this.login = login;
     }
 
     public String getSenha() {
@@ -93,5 +111,13 @@ public class Usuario implements Serializable, UserDetails {
         this.roles = roles;
     }
 
-
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", senha='" + senha + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }//class

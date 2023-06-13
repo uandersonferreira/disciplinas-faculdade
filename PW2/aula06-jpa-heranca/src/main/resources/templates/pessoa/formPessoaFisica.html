@@ -73,11 +73,17 @@
 
 		<!--SELEÇÃO PESSOA -->
 		<div class="form-row">
-			<div class="form-group col-md-12" >
+			<div class="form-group col-md-6" >
 				<label for="cpf">CPF</label>
 				<input type="text" th:errorclass="is-invalid"  name="cpf" id="cpf" th:field="*{cpf}" class="form-control" placeholder="000.000.000-00">
 				<div class="invalid-feedback" th:errors="*{cpf}"></div>
 			</div>
+			<div class="form-group col-md-6" >
+				<label for="cpf">Senha</label>
+				<input type="password" th:errorclass="is-invalid"  name="senha" id="senha" th:field="*{usuario.senha}" class="form-control">
+				<div class="invalid-feedback" th:errors="*{cpf}"></div>
+			</div>
+
 			<!--BOTÃO SUBMIT-->
 			<div class="form-group col-md-12" id="form-btn-cadastrar">
 				<button type="submit" name="enviar" value="salvar" class="btn btn-primary form-control">Salvar</button>

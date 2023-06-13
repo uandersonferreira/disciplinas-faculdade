@@ -14,8 +14,8 @@ public class PessoaFisica extends Pessoa  {
 //    @CPF(message = "Informe um CPF válido. ex: 000.000.000-00") Optei por utilizar uma mascara do Jquery
     private String cpf;
 
-    public PessoaFisica(Long id, String nome, String email, String telefone, List<Venda> vendaList, Endereco endereco, String cpf) {
-        super(id, nome, email, telefone, vendaList, endereco);
+    public PessoaFisica(String nome, String email, String telefone, List<Venda> vendaList, Endereco endereco, Usuario usuario, String cpf) {
+        super(nome, email, telefone, vendaList, endereco, usuario);
         this.cpf = cpf;
     }
 

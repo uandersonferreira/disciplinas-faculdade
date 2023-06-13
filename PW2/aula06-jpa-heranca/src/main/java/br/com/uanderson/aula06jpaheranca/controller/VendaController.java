@@ -1,16 +1,12 @@
 package br.com.uanderson.aula06jpaheranca.controller;
 
-import br.com.uanderson.aula06jpaheranca.model.entity.ItemVenda;
-import br.com.uanderson.aula06jpaheranca.model.entity.Pessoa;
-import br.com.uanderson.aula06jpaheranca.model.entity.Produto;
-import br.com.uanderson.aula06jpaheranca.model.entity.Venda;
-import br.com.uanderson.aula06jpaheranca.model.repository.ItemVendaRepository;
-import br.com.uanderson.aula06jpaheranca.model.repository.PessoaRepository;
-import br.com.uanderson.aula06jpaheranca.model.repository.ProdutoRepository;
-import br.com.uanderson.aula06jpaheranca.model.repository.VendaRepository;
+import br.com.uanderson.aula06jpaheranca.model.entity.*;
+import br.com.uanderson.aula06jpaheranca.model.repository.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -32,15 +28,17 @@ public class VendaController {
     private final ProdutoRepository produtoRepository;
     private final PessoaRepository pessoaRepository;
     private final ItemVendaRepository itemVendaRepository;
+    private  final UsuarioRepository usuarioRepository;
 
     private List<ItemVenda> itemVendaList = new ArrayList<>();
     private Venda venda;
    @Autowired
-    public VendaController(VendaRepository vendaRepository, ProdutoRepository produtoRepository, PessoaRepository pessoaRepository, ItemVendaRepository itemVendaRepository, Venda venda) {
+    public VendaController(VendaRepository vendaRepository, ProdutoRepository produtoRepository, PessoaRepository pessoaRepository, ItemVendaRepository itemVendaRepository, UsuarioRepository usuarioRepository, Venda venda) {
         this.vendaRepository = vendaRepository;
        this.produtoRepository = produtoRepository;
        this.pessoaRepository = pessoaRepository;
        this.itemVendaRepository = itemVendaRepository;
+       this.usuarioRepository = usuarioRepository;
        this.venda = venda;
 
    }
@@ -65,6 +63,19 @@ public class VendaController {
         System.out.println("VENDA SESSION: "+venda.getItensList().size());
         return modelAndView;
     }
+
+    private void buscarUsuarioLogado(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)){
+            String nameAuthentication = authentication.getName();
+            Usuario usuario = usuarioRepository.findUsuarioByLogin(nameAuthentication);
+
+        }
+    }//method
+
+
+
+
 
     @GetMapping("/finalizar")
     public ModelAndView finalizarCompra(){

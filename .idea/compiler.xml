@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="aula03-jpa (1)" />
+        <module name="estatisticas-estudantes-estruturado" />
+        <module name="aula01" />
+        <module name="aula03-jpa (2)" />
+        <module name="aula06-jpa-heranca" />
+        <module name="programacao-funcional" />
+        <module name="estatisticas-estudantes-funcional" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="aula03-jpa" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

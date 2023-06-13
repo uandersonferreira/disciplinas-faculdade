@@ -9,7 +9,7 @@ public class Aula06JpaHerancaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Aula06JpaHerancaApplication.class, args);
-        System.out.println(new BCryptPasswordEncoder().encode("123"));
+        System.out.println("senha: "+ new BCryptPasswordEncoder().encode("123"));
     }
 
 }

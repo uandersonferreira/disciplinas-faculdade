@@ -32,19 +32,29 @@ public  class Pessoa implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @Valid
     private Endereco endereco;//UMA PESSOA TÊM MAIS DE UM ENDEREÇO  1 - N
+    // PESSOA TÊM 1 USUÁRIO É 1 USUÁRIO PERTENCE A 1 PESSOA - ASSOCIAÇÃO
+    @OneToOne(cascade = CascadeType.ALL)
+    private Usuario usuario;
 
-    public Pessoa(Long id, String nome, String email, String telefone, List<Venda> vendaList, Endereco endereco) {
-        this.id = id;
+    public Pessoa(String nome, String email, String telefone, List<Venda> vendaList, Endereco endereco, Usuario usuario) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.vendaList = vendaList;
         this.endereco = endereco;
+        this.usuario = usuario;
     }
 
     public Pessoa() {
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public Endereco getEndereco() {
         return endereco;

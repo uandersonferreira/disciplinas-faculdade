@@ -16,8 +16,8 @@ public class PessoaJuridica extends Pessoa {
 //    @CNPJ(message = "Informe um CNPJ válido. ex: 00.000.000/0000-00")
     private String cnpj;
 
-    public PessoaJuridica(Long id, String nome, String email, String telefone, List<Venda> vendaList, Endereco endereco, String razaoSocial, String cnpj) {
-        super(id, nome, email, telefone, vendaList, endereco);
+    public PessoaJuridica(String nome, String email, String telefone, List<Venda> vendaList, Endereco endereco, Usuario usuario, String razaoSocial, String cnpj) {
+        super(nome, email, telefone, vendaList, endereco, usuario);
         this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
     }

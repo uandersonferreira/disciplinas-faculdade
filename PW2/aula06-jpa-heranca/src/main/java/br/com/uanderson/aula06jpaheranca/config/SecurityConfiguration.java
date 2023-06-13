@@ -29,7 +29,10 @@ public class SecurityConfiguration {
                                 authz //define com as requisições HTTP devem ser tratadas com relação à segurança.
                                         .requestMatchers("/webjars/**").permitAll()
                                         .requestMatchers("/vendas/list").hasAnyRole("ADMIN")
-                                        .requestMatchers("/pessoas/form").permitAll()
+                                        .requestMatchers("/pessoas/fisica/form").permitAll()
+                                        .requestMatchers("/pessoas/fisica/save").permitAll()
+                                        .requestMatchers("/pessoas/juridica/form").permitAll()
+                                        .requestMatchers("/pessoas/juridica/save").permitAll()
                                         .requestMatchers(HttpMethod.POST, "/pessoas/save").permitAll()
                                         .anyRequest() //define que a configuração é válida para qualquer requisição.
                                         .authenticated() //define que o usuário precisa estar autenticado.
@@ -53,9 +56,10 @@ public class SecurityConfiguration {
     @Autowired
     public void configureUserDetails(AuthenticationManagerBuilder builder) throws Exception {
         builder.userDetailsService(usuarioDetailsConfig).passwordEncoder(new BCryptPasswordEncoder());
-
-        builder.inMemoryAuthentication() //configuração de autenticação em memória
-                .withUser("admin").password(new BCryptPasswordEncoder().encode("123")).roles("ADMIN");
+//
+//        builder.inMemoryAuthentication() //configuração de autenticação em memória
+//                .withUser("admin").password(new BCryptPasswordEncoder().encode("123")).roles("ADMIN");
+//
     }
 
     /**
@@ -65,9 +69,8 @@ public class SecurityConfiguration {
      * @return
      */
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
 
 }
