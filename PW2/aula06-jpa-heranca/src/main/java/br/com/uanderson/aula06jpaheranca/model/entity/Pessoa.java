@@ -29,7 +29,7 @@ public  class Pessoa implements Serializable {
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     @Null//Pois a pessoa pode não ter nenhuma venda
     private List<Venda> vendaList;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "pessoa", cascade = CascadeType.ALL)
     @Valid
     private Endereco endereco;//UMA PESSOA TÊM MAIS DE UM ENDEREÇO  1 - N
     // PESSOA TÊM 1 USUÁRIO É 1 USUÁRIO PERTENCE A 1 PESSOA - ASSOCIAÇÃO

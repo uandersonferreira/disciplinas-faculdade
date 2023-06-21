@@ -1,11 +1,11 @@
 package br.com.uanderson.aula06jpaheranca.controller;
 
 import br.com.uanderson.aula06jpaheranca.model.entity.ItemVenda;
-import br.com.uanderson.aula06jpaheranca.model.entity.Produto;
+import br.com.uanderson.aula06jpaheranca.model.entity.Pessoa;
 import br.com.uanderson.aula06jpaheranca.model.repository.ItemVendaRepository;
-import br.com.uanderson.aula06jpaheranca.model.repository.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
+import br.com.uanderson.aula06jpaheranca.model.repository.PessoaRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -20,10 +20,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Transactional
 public class ItemVendaController {
     private  final ItemVendaRepository itemVendaRepository;
+    private final PessoaRepository pessoaRepository;
 
-    @Autowired
-    public ItemVendaController(ItemVendaRepository itemVendaRepository) {
+
+
+    public ItemVendaController(ItemVendaRepository itemVendaRepository, PessoaRepository pessoaRepository) {
         this.itemVendaRepository = itemVendaRepository;
+        this.pessoaRepository = pessoaRepository;
     }
 
     @RequestMapping("/")
@@ -33,7 +36,11 @@ public class ItemVendaController {
 
     @GetMapping("/list")
     public String listarItensVendas(ModelMap modelMap){
-        modelMap.addAttribute("itensVenda", itemVendaRepository.listAll());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String emailLoginUsuario = authentication.getName();
+        Pessoa pessoa = pessoaRepository.findPessoaByEmail(emailLoginUsuario);
+
+        modelMap.addAttribute("itensVenda", itemVendaRepository.findItensByPessoaId(pessoa.getId()));
         return "itensVenda/list";//page html
     }
 

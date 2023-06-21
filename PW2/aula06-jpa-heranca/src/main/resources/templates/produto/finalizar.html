@@ -51,8 +51,17 @@
                         <div class="col-sm-12  col-md-6">
                             <label for="pessoa">Cliente</label>
                             <select id="pessoa" th:field="*{venda.pessoa}" name="pessoa" class="form-control">
-                                <option th:each="p :${pessoaList}"
-                                        th:value="${p.id}" th:text="${p.nome}">
+                                <option
+                                        th:value="${pessoaLogada.id}" th:text="${pessoaLogada.nome}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-12  col-md-6">
+                            <label for="pessoa">Endereço</label>
+                            <select id="endereco" th:field="*{venda.pessoa.endereco}" name="pessoa" class="form-control">
+                                <option
+                                        th:value="${pessoaLogada.getEndereco().id}" th:text="${pessoaLogada.getEndereco()}">
                                 </option>
                             </select>
                         </div>

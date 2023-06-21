@@ -28,7 +28,7 @@
             <td th:text="${itens.venda.id}"></td><!-- atributo name-->
             <td th:text="${itens.venda.pessoa.nome}"></td><!-- atributo name-->
             <td th:text="${itens.total()}"></td><!-- atributo name-->
-<!--            <td> <a style="color: green" th:href="@{/itemvenda/edit/{id}(id=${itens.id})}"><i class="fa-solid fa-cart-shopping"></i></a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
+<!--            <td> <a css="color: green" th:href="@{/itemvenda/edit/{id}(id=${itens.id})}"><i class="fa-solid fa-cart-shopping"></i></a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
             <td> <a th:href="@{/itemvenda/edit/{id}(id=${itens.id})}"><i class="fa-solid fa-pen-to-square "></i></a> </td> <!--pessoas/edit/1 - CONTROLLER -->
             <td> <a style="color: red" onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/itemvenda/remove/{id}(id=${itens.id})}"><i class="fa-solid fa-trash"></i></a> </td>
         </tr>

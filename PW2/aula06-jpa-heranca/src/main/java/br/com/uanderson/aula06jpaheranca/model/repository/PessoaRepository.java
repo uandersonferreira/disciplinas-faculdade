@@ -22,6 +22,11 @@ public class PessoaRepository {
         Pessoa pessoa = entityManager.find(Pessoa.class, id);
         return pessoa;
     }
+    public Pessoa findPessoaByEmail(String email){
+        Query query = entityManager.createQuery("select p from Pessoa p where p.email = :email");
+        query.setParameter("email",email);
+        return (Pessoa) query.getSingleResult();
+    }
 
     public List<Pessoa> listAll(){
         final Query query = entityManager.createQuery("from Pessoa");

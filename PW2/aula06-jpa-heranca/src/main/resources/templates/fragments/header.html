@@ -1,16 +1,20 @@
-<header th:fragment="header">
-    <nav class="navbar navbar-expand-sm fixed-top bg-dark ">
+<header th:fragment="header" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-expand-sm fixed-top bg-dark" sec:authorize="isAuthenticated()">
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{/}">
                 <span class="text-white">&lt;<span class="text-success">H</span>-ome&gt;</IF-Developer></span>
             </a>
+
+            <div style="color: white">
+                <h4>Olá, <span sec:authentication="name" ></span></h4>
+            </div>
 
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link text-success"  th:href="@{/produtos/list}">Produtos</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link text-success"  th:href="@{/vendas/list}">Vendas</a>
                 </li>
 

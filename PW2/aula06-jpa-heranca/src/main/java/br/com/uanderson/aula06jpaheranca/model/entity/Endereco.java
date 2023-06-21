@@ -26,18 +26,21 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "cidade_id")
     @NotNull(message = "Informe uma Cidade")
     private Cidade cidade;
+    @OneToOne
+    private Pessoa pessoa;
 
 
     public Endereco() {
     }
 
-    public Endereco(Long id, String cep, String logradouro, String complemento, String bairro, Cidade cidade) {
+    public Endereco(Long id, String cep, String logradouro, String complemento, String bairro, @NotNull(message = "Informe uma Cidade") Cidade cidade, Pessoa pessoa) {
         this.id = id;
         this.cep = cep;
         this.logradouro = logradouro;
         this.complemento = complemento;
         this.bairro = bairro;
         this.cidade = cidade;
+        this.pessoa = pessoa;
     }
 
     public Cidade getCidade() {
@@ -88,7 +91,13 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
     }
 
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
 
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
 
     @Override
     public String toString() {
@@ -98,6 +107,8 @@ public class Endereco implements Serializable {
                 ", logradouro='" + logradouro + '\'' +
                 ", complemento='" + complemento + '\'' +
                 ", bairro='" + bairro + '\'' +
+                ", cidade=" + cidade +
+                ", pessoa=" + pessoa +
                 '}';
     }
 }

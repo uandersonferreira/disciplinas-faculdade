@@ -1,10 +1,13 @@
 package br.com.uanderson.aula06jpaheranca.controller;
 
 import br.com.uanderson.aula06jpaheranca.model.entity.Estado;
+import br.com.uanderson.aula06jpaheranca.model.entity.Pessoa;
 import br.com.uanderson.aula06jpaheranca.model.entity.PessoaFisica;
 import br.com.uanderson.aula06jpaheranca.model.entity.Role;
 import br.com.uanderson.aula06jpaheranca.model.repository.*;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,16 +31,14 @@ public class PessoaFisicaController {
     private final CidadeRepository cidadeRepository;
     private final EstadoRepository estadoRepository;
     private final EnderecoRepository enderecoRepository;
-    private final UsuarioRepository usuarioRepository;
     private final RoleRepository roleRepository;
 
-    public PessoaFisicaController(PessoaFisicaRepository pessoaFisicaRepository, PessoaRepository pessoaRepository, CidadeRepository cidadeRepository, EstadoRepository estadoRepository, EnderecoRepository enderecoRepository, UsuarioRepository usuarioRepository, RoleRepository roleRepository) {
+    public PessoaFisicaController(PessoaFisicaRepository pessoaFisicaRepository, PessoaRepository pessoaRepository, CidadeRepository cidadeRepository, EstadoRepository estadoRepository, EnderecoRepository enderecoRepository, RoleRepository roleRepository) {
         this.pessoaFisicaRepository = pessoaFisicaRepository;
         this.pessoaRepository = pessoaRepository;
         this.cidadeRepository = cidadeRepository;
         this.estadoRepository = estadoRepository;
         this.enderecoRepository = enderecoRepository;
-        this.usuarioRepository = usuarioRepository;
         this.roleRepository = roleRepository;
     }
 

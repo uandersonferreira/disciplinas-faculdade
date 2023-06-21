@@ -37,4 +37,9 @@ public class ItemVendaRepository {
         entityManager.merge(itemVenda);
     }
 
+    public List<ItemVenda> findItensByPessoaId(Long id){
+        Query query = entityManager.createQuery("select i from ItemVenda i where i.venda.pessoa.id = :id ");
+        query.setParameter("id", id);
+        return query.getResultList();
+    }
 }//class

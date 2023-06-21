@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR"  xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="~{fragments/head::head}">
 
 <body>
@@ -31,7 +31,7 @@
             <td th:text="${pj.getTelefone()}"></td><!-- atributo name-->
             <td th:text="${pj.getEndereco().cidade.nome}"></td><!-- atributo name-->
             <td> <a th:href="@{/pessoas/juridica/edit/{id}(id=${pj.id})}"> <i class="fa-solid fa-pen-to-square "></i> </a> </td> <!--pessoas/edit/1 - CONTROLLER -->
-            <td> <a style="color: red"  onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/juridica/remove/{id}(id=${pj.id})}"> <i class="fa-solid fa-trash"></i> </a> </td>
+            <td sec:authorize="hasRole('ROLE_ADMIN')"> <a style="color: red"  onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/juridica/remove/{id}(id=${pj.id})}"> <i class="fa-solid fa-trash"></i> </a> </td>
         </tr>
         </tbody>
     </table>

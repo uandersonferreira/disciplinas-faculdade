@@ -83,13 +83,24 @@
 				<input type="text" th:errorclass="is-invalid" name="cnpj" id="cnpj" th:field="*{cnpj}" class="form-control" placeholder="00.000.000/0000-00">
 				<div class="invalid-feedback" th:errors="*{cnpj}"></div>
 			</div>
+			<div class="form-group col-md-6" >
+				<label for="senha">Senha</label>
+				<input type="password" th:errorclass="is-invalid"  name="senha" id="senha" th:field="*{usuario.senha}" class="form-control">
+				<div class="invalid-feedback" th:errors="*{usuario.senha}"></div>
+			</div>
 
 		</div><!--form-row-->
 
 		<!--BOTÃO SUBMIT-->
-		<div class="form-group col-md-12" id="form-btn-cadastrar">
+	<div class="row">
+		<div class="form-group col-sm-12 col-md-6" id="form-btn-cadastrar">
 			<button type="submit" name="enviar" value="salvar" class="btn btn-primary form-control">Salvar</button>
 		</div>
+
+		<div class="form-group col-sm-12 col-md-6">
+			<a th:href="@{/}" class="btn btn-lg btn-block btn-success">Sair</a>
+		</div>
+	</div>
 
 	</form>
 </div>

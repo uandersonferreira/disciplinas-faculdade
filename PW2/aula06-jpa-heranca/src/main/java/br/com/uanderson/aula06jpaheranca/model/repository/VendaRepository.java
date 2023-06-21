@@ -1,5 +1,6 @@
 package br.com.uanderson.aula06jpaheranca.model.repository;
 
+import br.com.uanderson.aula06jpaheranca.model.entity.Pessoa;
 import br.com.uanderson.aula06jpaheranca.model.entity.Produto;
 import br.com.uanderson.aula06jpaheranca.model.entity.Venda;
 import jakarta.persistence.EntityManager;
@@ -25,6 +26,13 @@ public class VendaRepository {
         /*
         method que irá listar todas as vendas cadastradas na base de dados.
          */
+    }
+
+    public List<Venda> findVendasByPessoaId(Long idPessoa){
+        Query query = entityManager.createQuery("select v from Venda v where v.pessoa.id = :idPessoa");
+        query.setParameter("idPessoa",idPessoa);
+
+        return query.getResultList();
     }
 
 

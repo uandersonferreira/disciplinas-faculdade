@@ -1,10 +1,11 @@
 package br.com.uanderson.aula06jpaheranca.controller;
 
 import br.com.uanderson.aula06jpaheranca.model.entity.PessoaJuridica;
-import br.com.uanderson.aula06jpaheranca.model.entity.PessoaJuridica;
+import br.com.uanderson.aula06jpaheranca.model.entity.Role;
 import br.com.uanderson.aula06jpaheranca.model.repository.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+
 @Controller
 @Transactional
 @RequestMapping("pessoas/juridica")
@@ -23,15 +26,18 @@ public class PessoaJuridicaController {
     private final PessoaRepository pessoaRepository;
     private final CidadeRepository cidadeRepository;
     private final EnderecoRepository enderecoRepository;
+    private final RoleRepository roleRepository;
+
 
 
 
     @Autowired
-    public PessoaJuridicaController(PessoaJuridicaRepository pessoaJuridicaRepository, PessoaRepository pessoaRepository, CidadeRepository cidadeRepository, EnderecoRepository enderecoRepository) {
+    public PessoaJuridicaController(PessoaJuridicaRepository pessoaJuridicaRepository, PessoaRepository pessoaRepository, CidadeRepository cidadeRepository, EnderecoRepository enderecoRepository, RoleRepository roleRepository) {
         this.pessoaJuridicaRepository = pessoaJuridicaRepository;
         this.pessoaRepository = pessoaRepository;
         this.cidadeRepository = cidadeRepository;
         this.enderecoRepository = enderecoRepository;
+        this.roleRepository = roleRepository;
     }
 
     @RequestMapping("/")
@@ -57,6 +63,16 @@ public class PessoaJuridicaController {
     @PostMapping("/save")
     public ModelAndView save(@Valid PessoaJuridica pessoaJuridica, BindingResult bindingResult){
         if (bindingResult.hasErrors()) return form(pessoaJuridica);
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        pessoaJuridica.getUsuario().setSenha(bCryptPasswordEncoder.encode(pessoaJuridica.getUsuario().getPassword()));
+        pessoaJuridica.getUsuario().setLogin(pessoaJuridica.getEmail());
+
+        // 1- ROLE_USER | 2- ROLE_ADMIN
+        ArrayList<Role> roles = new ArrayList<>();
+        Role role = roleRepository.findRoleById(1L);
+        roles.add(role);
+        pessoaJuridica.getUsuario().setRoles(roles);
 
         enderecoRepository.save(pessoaJuridica.getEndereco());
         pessoaJuridicaRepository.save(pessoaJuridica);

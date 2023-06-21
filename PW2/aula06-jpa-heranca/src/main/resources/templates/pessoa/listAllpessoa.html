@@ -26,8 +26,8 @@
             <td th:text="${p.getTelefone()}"></td><!-- atributo name-->
             <td th:text="${p.getEndereco().cidade.nome}"></td><!-- atributo name-->
 <!--            <td th:text="${p.endereco.cidade.nome}"></td>&lt;!&ndash; atributo name&ndash;&gt;-->
-<!--            <span th:if="${p.class.name == 'br.com.uanderson.aula06jpaheranca.model.entity.PessoaFisica'}" th:text="${p.dadosPF(p).getNome()}"></span>-->
-<!--            <span th:if="${p.class.name == 'br.com.uanderson.aula06jpaheranca.model.entity.PessoaJuridica'}" th:text="${p.dadosPJ(p).getCnpj()}"></span>-->
+<!--            <span th:if="${p.class.name == 'br.com.uanderson.loja.model.entity.PessoaFisica'}" th:text="${p.dadosPF(p).getNome()}"></span>-->
+<!--            <span th:if="${p.class.name == 'br.com.uanderson.loja.model.entity.PessoaJuridica'}" th:text="${p.dadosPJ(p).getCnpj()}"></span>-->
 
 <!--            <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
 <!--            <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>-->

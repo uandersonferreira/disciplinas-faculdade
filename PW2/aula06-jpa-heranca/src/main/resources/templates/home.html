@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="pt-BR"  xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head th:replace="~{fragments/head::head}">
 
@@ -8,12 +9,15 @@
 <header th:replace="~{fragments/header::header}"></header>
 
 <div class="container my-5 text-center">
-        <h1>Bem Vindo</h1>
+        <h1>Bem Vindo,
+            <span sec:authentication="name" style="border: 1px solid red">nome</span>
+        </h1>
         <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur ipsum iusto quas voluptates dolorum in labore excepturi ipsa impedit! Veritatis ut fuga delectus alias. Minima quo laborum reprehenderit numquam distinctio.
             Qui ipsa quaerat repellat eligendi maxime blanditiis non, officiis architecto amet ex laboriosam nobis fugit harum nulla molestiae itaque beatae ipsam natus ducimus voluptatem eveniet nisi esse voluptate obcaecati. Amet!
             Vero ad rerum harum a laudantium, consequatur atque similique, vel cupiditate aliquid soluta explicabo blanditiis adipisci, aut nesciunt dolorum voluptas hic tenetur doloremque officia perferendis! Quam dignissimos exercitationem sed esse.
         </p>
+
 </div>
 <footer th:replace="~{fragments/footer::footer}"></footer>
 </body>

@@ -32,7 +32,7 @@ public class VendaController {
 
     private List<ItemVenda> itemVendaList = new ArrayList<>();
     private Venda venda;
-   @Autowired
+
     public VendaController(VendaRepository vendaRepository, ProdutoRepository produtoRepository, PessoaRepository pessoaRepository, ItemVendaRepository itemVendaRepository, UsuarioRepository usuarioRepository, Venda venda) {
         this.vendaRepository = vendaRepository;
        this.produtoRepository = produtoRepository;
@@ -45,7 +45,11 @@ public class VendaController {
 
     @GetMapping("/list")
     public String listarVendas(ModelMap modelMap){
-        modelMap.addAttribute("listVendas", vendaRepository.listAll());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String emailLoginUsuario = authentication.getName();
+        Pessoa pessoa = pessoaRepository.findPessoaByEmail(emailLoginUsuario);
+
+        modelMap.addAttribute("listVendas", vendaRepository.findVendasByPessoaId(pessoa.getId()));
         return "venda/list";//page html
     }
 
@@ -58,39 +62,37 @@ public class VendaController {
     public ModelAndView chamarCarrinho(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("produto/carrinho");
         venda.setItensList(itemVendaList);//associando a lista de itens a venda
-
         session.setAttribute("venda", venda);
-        System.out.println("VENDA SESSION: "+venda.getItensList().size());
+
         return modelAndView;
     }
 
-    private void buscarUsuarioLogado(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)){
-            String nameAuthentication = authentication.getName();
-            Usuario usuario = usuarioRepository.findUsuarioByLogin(nameAuthentication);
-
-        }
-    }//method
-
-
-
+//    private void buscarUsuarioLogado(){
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (!(authentication instanceof AnonymousAuthenticationToken)){
+//            String nameAuthentication = authentication.getName();
+//            Usuario usuario = usuarioRepository.findUsuarioByLogin(nameAuthentication);
+//
+//        }
+//    }//method
 
 
     @GetMapping("/finalizar")
     public ModelAndView finalizarCompra(){
         ModelAndView modelAndView = new ModelAndView("produto/finalizar");
         venda.setItensList(itemVendaList);
-        List<Pessoa> pessoas = pessoaRepository.listAll();
 
-        modelAndView.addObject("pessoaList", pessoas);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String emailLoginUsuario = authentication.getName();
+        Pessoa pessoa = pessoaRepository.findPessoaByEmail(emailLoginUsuario);
+
+        modelAndView.addObject("pessoaLogada", pessoa);
         modelAndView.addObject("venda", venda);
         return modelAndView;
     }
 
     @PostMapping("/finalizar/confirmar")
     public ModelAndView confirmarCompra(Long pessoa){
-//        Pessoa pessoa = pessoaRepository.listAll().get(0);//SOMENTE PARA TESTE ESTOU SEMPRE ATRIBUINDO A VENDA A 1° PESSOA DO BANCO QUE É RETORNADA.
         Pessoa pessoaEncontrada = pessoaRepository.findById(pessoa);
         venda.setId(null);
         venda.setLocalDate(LocalDate.now());
