@@ -67,15 +67,6 @@ public class VendaController {
         return modelAndView;
     }
 
-//    private void buscarUsuarioLogado(){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (!(authentication instanceof AnonymousAuthenticationToken)){
-//            String nameAuthentication = authentication.getName();
-//            Usuario usuario = usuarioRepository.findUsuarioByLogin(nameAuthentication);
-//
-//        }
-//    }//method
-
 
     @GetMapping("/finalizar")
     public ModelAndView finalizarCompra(){

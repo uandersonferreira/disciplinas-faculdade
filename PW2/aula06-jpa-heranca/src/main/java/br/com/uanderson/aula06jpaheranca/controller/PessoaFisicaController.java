@@ -79,7 +79,6 @@ public class PessoaFisicaController {
         Role role = roleRepository.findRoleById(1L);
         roles.add(role);
         pessoaFisica.getUsuario().setRoles(roles);
-//        pessoaFisica.getUsuario().setRoles(List.of(new Role("ROLE_USER")));
 
         enderecoRepository.save(pessoaFisica.getEndereco());
         pessoaFisicaRepository.save(pessoaFisica);

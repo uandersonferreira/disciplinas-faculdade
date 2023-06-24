@@ -38,7 +38,7 @@ public class SecurityConfiguration {
                                         .authenticated() //define que o usuário precisa estar autenticado.
                                         .and()
                                         .formLogin() //define que a autenticação pode ser feita via formulário de login.
-                                        .loginPage("/login").defaultSuccessUrl("/", true) // passamos como parâmetro a URL para acesso à página de login que criamos
+                                        .loginPage("/login").defaultSuccessUrl("/", true)// passamos como parâmetro a URL para acesso à página de login que criamos
                                         .permitAll() //define que essa página pode ser acessada por todos, independentemente do usuário estar autenticado ou não.
                                         .and()
                                         .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

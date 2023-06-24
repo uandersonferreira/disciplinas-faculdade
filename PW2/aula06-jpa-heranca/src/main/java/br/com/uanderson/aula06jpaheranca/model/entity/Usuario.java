@@ -16,7 +16,6 @@ public class Usuario implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Preencha o campo usuário")
     @Column(unique = true)
     private String login;
     @NotBlank(message = "Preencha o campo senha")
