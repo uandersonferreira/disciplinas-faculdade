@@ -1,0 +1,18 @@
+
+‘
+java:S1130"tRemove the declaration of thrown exception 'java.net.URISyntaxException', as it cannot be thrown from method's body.(‰§¤Ú8»úö„Ş1
+G	java:S106"+Replace this use of System.out by a logger.(²ôÏÇ8Çúö„Ş1
+G	java:S106#"+Replace this use of System.out by a logger.(µÎÆ‹8Éúö„Ş1
+L	java:S106'"+Replace this use of System.out by a logger.(û–‘öøÿÿÿÿ8Êúö„Ş1
+s
+java:S3457+"Q%n should be used in place of \n to produce the platform-specific line separator.(ßşÓûÿÿÿÿ8Êúö„Ş1
+;
+java:S3457+"3rd argument is not used.(ßşÓûÿÿÿÿ8Ëúö„Ş1
+L	java:S106+"+Replace this use of System.out by a logger.(ßşÓûÿÿÿÿ8Ëúö„Ş1
+L	java:S1063"+Replace this use of System.out by a logger.(Şš¶Ûıÿÿÿÿ8Ìúö„Ş1
+G	java:S1067"+Replace this use of System.out by a logger.(¾¡ 8Ìúö„Ş1
+G	java:S106>"+Replace this use of System.out by a logger.(ÎæÊ8Íúö„Ş1
+G	java:S106?"+Replace this use of System.out by a logger.(¯‚Õ8Íúö„Ş1
+G	java:S106@"+Replace this use of System.out by a logger.(‘åÏé8Îúö„Ş1
+G	java:S106A"+Replace this use of System.out by a logger.(ôßª8Îúö„Ş1
+L	java:S106B"+Replace this use of System.out by a logger.(’Ğï¿ÿÿÿÿÿ8Îúö„Ş1
