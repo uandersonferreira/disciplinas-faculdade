@@ -23,7 +23,7 @@
             <td th:text="${v.getLocalDate()}"></td><!-- atributo name-->
             <td th:text="${v.pessoa.nome}"></td><!-- atributo name-->
             <td th:text="${v.getTotalVenda()}"></td><!-- atributo name-->
-            <!--                    <td> <a th:href="@{/produtos/edit/{id}(id=${p.id})}">Editar</a> </td> &lt;!&ndash;pessoas/edit/1 - CONTROLLER &ndash;&gt;-->
+            <td> <a th:href="@{/vendas/visualizar/{id}(id=${v.id})}">Visualizar</a> </td> <!--pessoas/edit/1 - CONTROLLER -->
             <!--                    <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produtos/remove/{id}(id=${p.id})}">Excluir</a> </td>-->
         </tr>
         </tbody>
