@@ -1,0 +1,9 @@
+
+0
+java:S1220""Move this file to a named package.
+\
+java:S1118":Add a private constructor to hide the implicit public one.(úäÌÂøÿÿÿÿ8Ã£ÌÊà1
+T
+java:S1172"2Remove this unused method parameter "nomeArquivo".(„¶œÕúÿÿÿÿ8«ÂËÊà1
+A
+java:S1168"+Return an empty collection instead of null.(¥¹ï
