@@ -9,6 +9,7 @@ import java.util.function.Function;
  */
 @Setter
 public class ProcessarBoletos {
+
     static final DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private Function<String, List<Boleto>> leituraRetorno;

@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26b11f37-3bea-49b6-8a4c-03de6b116e4a" name="Changes" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/../pattern-strategy/.idea/sonarlint/issuestore/0/b/0ba1b9c7a4878802f938e331cc2d8a042087ec6b" beforeDir="false" afterPath="$PROJECT_DIR$/../pattern-strategy/.idea/sonarlint/issuestore/0/b/0ba1b9c7a4878802f938e331cc2d8a042087ec6b" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pattern-strategy/.idea/sonarlint/issuestore/e/d/ed580f7855e15a1a18342cae7b7ddde187127fc8" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../pattern-strategy/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../pattern-strategy/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
@@ -12,6 +13,26 @@
       <change beforePath="$PROJECT_DIR$/../pattern-strategy/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../pattern-strategy/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pattern-strategy/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../pattern-strategy/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pattern-strategy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../pattern-strategy/.idea/workspace.xml" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/banco-brasil-1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bradesco-1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Boleto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/LeituraRetorno.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/LeituraRetornoBancoBrasil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/LeituraRetornoBradesco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Principal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ProcessarBoletos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/TipoArquivoRetorno.java" afterDir="false" />
+>>>>>>> origin/function-example
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +49,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+<<<<<<< HEAD
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+=======
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+>>>>>>> origin/function-example
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
@@ -45,6 +70,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
@@ -64,14 +90,40 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Principal.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.intellij.platform.ide.impl.presentationAssistant.PresentationAssistantConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+>>>>>>> origin/function-example
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
     </key>
   </component>
   <component name="RunManager">
+<<<<<<< HEAD
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
+=======
+    <configuration name="Principal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Principal" />
+>>>>>>> origin/function-example
       <module name="retorno-boleto-manha" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -79,6 +131,7 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< HEAD
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -90,6 +143,12 @@
       </set>
     </attachedChunks>
   </component>
+=======
+        <item itemvalue="Application.Principal" />
+      </list>
+    </recent_temporary>
+  </component>
+>>>>>>> origin/function-example
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -101,7 +160,10 @@
       <workItem from="1708344762094" duration="6925000" />
       <workItem from="1708945979834" duration="3663000" />
       <workItem from="1709551029326" duration="1794000" />
+<<<<<<< HEAD
       <workItem from="1709553481303" duration="452000" />
+=======
+>>>>>>> origin/function-example
     </task>
     <servers />
   </component>
